@@ -19,7 +19,7 @@ const john = {
 };
 const johnBMI = calcBMI(john.weight,john.tall);
 console.log(`John Smith BMI is: ${johnBMI.toFixed(2)}`);
-
+z
 //compare the BMI 
 if(markBMI > johnBMI){
   console.log(`"Mark's BMI (${markBMI}) is higher than John's (${johnBMI})!"`)
