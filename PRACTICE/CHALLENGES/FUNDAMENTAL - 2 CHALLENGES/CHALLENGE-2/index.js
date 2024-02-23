@@ -36,7 +36,7 @@ const total = function(Tips, arrayTips){
 }
 const Result = total(Tips, arrayTips(Tips))
 console.log(`The amount is ${Tips}`);
-console.log(`The Bills + Tips is : ${Result}` )
+console.log(`The Bills + Tips is : ${Result}`)
 
 
 
