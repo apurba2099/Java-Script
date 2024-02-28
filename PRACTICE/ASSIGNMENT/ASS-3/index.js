@@ -61,6 +61,34 @@ console.log(thirdCountry);
 console.log('/////////////////////////');
 ////////////////////////////////////
 //P. Introduction to Arrays
+const population = [1441, 1437, 336, 172];
+const lengthpopulation = population.length === 4;
+
+console.log("It has 4 elements the country population ",lengthpopulation);
+//I learn my personal research map() meythod that i used here!!
+const percentage =population.map(percentageOfWorld1);
+//I learn my personal research join() meythod that i used here!!
+const joinPercentage = percentage.join("% ")
+console.log(`Here the all percentage the given array: ${joinPercentage}%`);
+////////////////////////////////////
+//Q. Basic Array Operations (Methods)
+
+//R. Introduction to Objects
+const myCountry = {
+    'Country':'India',
+    'Captial':'New Delhi',
+    'language':'English',
+    'Population':'150',
+    'Neighbours':['China','Bangladesh','Pakistan']
+};
+console.log(myCountry);
+
+
+
+
+
+
+
 
 
 
