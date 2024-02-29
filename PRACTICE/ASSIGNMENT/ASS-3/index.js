@@ -81,7 +81,7 @@ const myCountry = {
     'Population':'150',
     'Neighbours':['China','Bangladesh','Pakistan']
 };
-console.log(myCountry) ;
+console.log(myCountry);
 
 
 
