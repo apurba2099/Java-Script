@@ -72,16 +72,38 @@ const joinPercentage = percentage.join("% ")
 console.log(`Here the all percentage the given array: ${joinPercentage}%`);
 ////////////////////////////////////
 //Q. Basic Array Operations (Methods)
+const neighbours = ['China', 'Srilanka', 'Nepal', 'Bhutan'];
+console.log(`Before adding new country: ${neighbours}`)
+neighbours.push('Utopia');
+console.log(`After Dissolved new country: ${neighbours}`);
+//----PERSONAL PRACTICE--- 
+//const newCountry = "Utopia";
+// const addcountry = neighbours.push(newCountry);
+// const addcountry2 = neighbours.pop(newCountry);
+//console.log(addcountry);
+//console.log(addcountry2);
+
+
+//HELPING THIS PART WITH INTERNET
+if (!neighbours.includes("Germany")) {
+    console.log("Probably not a central European country.");
+}
+// Step 5: Change the name of one neighbouring country
+const indexToReplace = neighbours.indexOf("Netherlands");
+if (indexToReplace !== -1) {
+    neighbours[indexToReplace] = "Republic of Sweden";
+}
+console.log(neighbours);
 
 //R. Introduction to Objects
-const myCountry = {
-    'Country':'India',
-    'Captial':'New Delhi',
-    'language':'English',
-    'Population':'150',
-    'Neighbours':['China','Bangladesh','Pakistan']
-};
-console.log(myCountry);
+ const myCountry = {
+     'Country':'India',
+     'Captial':'New Delhi',
+     'language':'English',
+     'Population':'150',
+     'Neighbours':['China','Bangladesh','Pakistan']
+ };
+ console.log(myCountry);
 
 
 
