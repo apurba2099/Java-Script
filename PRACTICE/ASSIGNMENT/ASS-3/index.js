@@ -95,7 +95,7 @@ if (indexToReplace !== -1) {
 }
 console.log(neighbours);
 
-//R. Introduction to Objects
+// R. Introduction to Objects
  const myCountry = {
      'Country':'India',
      'Captial':'New Delhi',
