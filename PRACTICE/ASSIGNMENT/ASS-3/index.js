@@ -154,6 +154,50 @@ for(let i=1; i<=50; i++){
 //V. Looping Arrays, Breaking and Continuing
 console.log('////V. Looping Arrays, Breaking and Continuing ////')
 
+//NOT done!!
+// const percentages2 = [];
+// for (let i = 0; i < populations.length; i++) {
+//   percentages2.push(percentageOfWorld1(populations[i]));
+// }
+// console.log(`percentages: ${percentages}`);
+// console.log(`percentages2: ${percentages2}`);
+// const areArraysEqual = (percentages) === (percentages2);
+// console.log(`Are the arrays equal? ${areArraysEqual}`);
+
+
+
+
+//W. Looping Backwards and Loops in Loops
+console.log('////W. Looping Backwards and Loops in Loops ////')
+
+const listOfNeighbours = [['Canada', 'Mexico'], ['Spain'], ['Norway', 'Sweden', 'Russia']];
+
+for (let i = 0; i < listOfNeighbours.length; i++) {
+    for (let j = 0; j < listOfNeighbours[i].length; j++) {
+        if (j > 0) {
+            console.log(`Neighbour: ${listOfNeighbours[i][j - 1]}`);
+        }
+        if (j < listOfNeighbours[i].length - 1) {
+            console.log(`Neighbour: ${listOfNeighbours[i][j + 1]}`);
+        }
+    }
+};
+
+
+//W. Looping Backwards and Loops in Loops
+console.log('////X. The while Loop////')
+const populations = [1441, 130, 83, 328];
+const percentages3 = [];
+let i = 0;
+while (i < populations.length) {
+    const percentage = (populations[i] / 7900) * 100;
+    percentages3.push(percentage);
+    i++;
+}
+console.log(percentages3);
+
+
+
 
 
 
