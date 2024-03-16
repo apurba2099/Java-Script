@@ -3,7 +3,7 @@ const printForecast = function (arr) {
   extraArrayBoxForJoining = [];
   //ekhane foreach use korlam google a usage ta dekhe jeta kina nested function use kore!!
   arr.forEach((item, index) => {
-    extraArrayBoxForJoining.push(`${item} C in ${index + 1} days`);
+    extraArrayBoxForJoining.push(`${item} C in ${index + 1} days...`);
   });
   return extraArrayBoxForJoining.join(", ");
 };
