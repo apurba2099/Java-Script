@@ -1,3 +1,4 @@
+//CHECK AMPLITITUDE DE-BUG OPERATION
 /*const calcTempAmplitudeBug = function (t1, t2) {
   const temps = t1.concat(t2);
   let max = 0;
@@ -18,6 +19,8 @@ const amplitudeBug = calcTempAmplitudeBug([3, 5, 9], [1, 2, 6]);
 console.log(amplitudeBug);
 */
 
+
+// REVERSE A STRING, ARRAY, AND NUMBER USING ONE FUNCTION
 function reverseInput(input) {
   return typeof input === "string"
     ? input.split("").reverse().join("")
