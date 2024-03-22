@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Madimi One', sans-serif;
+}
+
+body {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
+}
+
+.open-modal {
+  font-weight: bold;
+  font-size: 1.5rem;
+  border: none;
+  margin: 5rem 2rem;
+  padding: 1rem 2.5rem;
+  border-radius: 1rem;
+  color: #2e2b43;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.show-modal:active {
+  transform: translate(0%, 3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  border: none;
+  cursor: pointer;
+  font-size: 3rem;
+  color: #2e2b43;
+  background: none;
+}
+
+h1 {
+  font-size: 2.3rem;
+  margin-bottom: 1.8rem;
+}
+
+p {
+  font-size: 1.4rem;
+  text-align: justify;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: white;
+  padding: 4rem;
+  border-radius: 10px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 5;
+}
