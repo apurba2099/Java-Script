@@ -26,9 +26,10 @@ body {
   color: #2e2b43;
   background-color: #ffffff;
   cursor: pointer;
+  outline: none;
 }
 
-.show-modal:active {
+.open-modal:active {
   transform: translate(0%, 3px);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
