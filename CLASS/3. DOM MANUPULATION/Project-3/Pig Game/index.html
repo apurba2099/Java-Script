@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+    <title>Pig Game</title>
+  </head>
+  <body>
+    <!-- Heading starts -->
+    <header>
+      <div class="bar"></div>
+      <div class="head">
+        <h1>PIG GAME</h1>
+      </div>
+    </header>
+    <!-- Heading ends -->
+    <canvas id="confetti" class="confetti"></canvas>
+    <!-- Main section starts -->
+    <main>
+      <section class="player player--0 player--active">
+        <h2 class="name" id="name--0">Player 1</h2>
+        <p class="score" id="score--0">33</p>
+        <div class="current">
+          <p class="current-label">Current</p>
+          <p class="current-score" id="current--0">0</p>
+        </div>
+      </section>
+      <section class="player player--1">
+        <h2 class="name" id="name--1">Player 2</h2>
+        <p class="score" id="score--1">66</p>
+        <div class="current">
+          <p class="current-label">Current</p>
+          <p class="current-score" id="current--1">0</p>
+        </div>
+      </section>
+
+      <!-- Dice image -->
+      <img src="./dice/dice-5.png" alt="Dice..." class="dice" />
+
+      <!-- Rules -->
+      <div class="rules">
+        <h4>Rules</h4>
+        <br />
+        <p>The player who first hits the score 100 will win the game.</p>
+        <br />
+        <ul>
+          <li>Esc - New Game</li>
+          <li>R - Roll Dice</li>
+          <li>Space - Hold</li>
+        </ul>
+        <p></p>
+      </div>
+
+      <!-- Buttons -->
+      <button class="btn btn--new">⌛ New game</button>
+      <button class="btn btn--roll">🎲 Roll dice</button>
+      <button class="btn btn--hold">✋ Hold</button>
+    </main>
+    <!-- Main section starts -->
+
+    <!-- Modal starts -->
+    <div class="modal hidden">
+      <div class="content">
+        <h2>
+          🎉 &ensp;Player <span class="player--wins">1</span> Wins&ensp; 🎉
+        </h2>
+        <button class="mbtn close-modal">⌛ New game</button>
+      </div>
+    </div>
+    <div class="overlay hidden"></div>
+    <!-- Modal ends -->
+
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
