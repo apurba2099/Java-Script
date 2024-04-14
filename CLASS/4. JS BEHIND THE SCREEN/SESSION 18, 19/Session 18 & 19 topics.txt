@@ -1,0 +1,9 @@
+**Session 18 | JS BTS** 🙀 
+
+       a. High Level Overview of JS
+       b. JS Engine and Runtime
+
+**Session 19 | JS BTS** 🙀 
+
+       a. Execution Context and Call Stack
+       b. Scope and the Scope Chain

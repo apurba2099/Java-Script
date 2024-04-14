@@ -1,0 +1,5 @@
+**Session 20 | JS BTS** 🙀 
+
+       a. Scoping in Practical
+       b. Hoisting and TDZ (Theory & Practical)
+       c. The **this** keyword (Theory & Practical)
