@@ -322,3 +322,7 @@ printBookInfo({
   author: "Robert Sedgewick",
   year: "2011",
 });
+printBookInfo({
+  title: "Algorithms",
+  author: "Robert Sedgewick",
+});
