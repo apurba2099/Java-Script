@@ -243,6 +243,7 @@ const books = [
 // hasExamplesInJava(books[1]);
 // Expected Output:
 // "No data available"
+console.log("5.1");
 
 const hasExamplesInJava = function ({ programmingLanguage }) {
   return programmingLanguage === "Java" || `"No data available"`;
@@ -257,15 +258,76 @@ console.log(hasExamplesInJava(books[1]));
 //   // ... removed for clarity
 //   onlineContent: false,          // <-- HERE
 // },
+console.log("5.2");
 
-for (const book of books) {
-  book.onlineContent && console.log(`${book.title} Provides online content`);
+for (const { title, onlineContent } of books) {
+  onlineContent && console.log(`${title} Provides online content`);
 }
 
 // 6.1
 // There are objects in the books array that don't have the onlineContent property at all. Loop over the books array, and log a string to the console in this format: "${title}" provides no data about its online content.
+console.log("6.1");
+
+for (const { title, onlineContent } of books) {
+  onlineContent ??
+    console.log(`${title} Provides no data about its online content`);
+}
+
+// 7.1
+// Some of the book objects from the books array are missing the edition property. Loop over the books array, and assign this property with a number 1 (if it doesn't already exist). Use logical assignment operators.
+console.log("7.1");
 
 for (const book of books) {
-  book.onlineContent ??
-    console.log(`${book.title} Provides no data about its online content`);
+  book.edition ||= 1;
+  console.log(`${book.title}: edition ${book.edition}`);
 }
+
+// 7.2
+// Some of the book objects from the books array have the highlighted property, which by default is set to true. Iterate over the books array, and if the thirdParty.goodreads.rating property is less than 4.2, reassign it with false.
+// Use the &&= operator (tip: you may also need the ! operator)
+console.log("7.2");
+
+// for (const {
+//   thirdParty: {
+//     goodreads: { rating },
+//   },
+//   highlighted,
+// } of books) {
+//   rating &&= (highlighted = false);
+// }
+for (const book of books) {
+  if (
+    book.thirdParty &&
+    book.thirdParty.goodreads &&
+    book.thirdParty.goodreads.rating < 4.2
+  ) {
+    book.highlighted = false;
+  }
+  console.table(book);
+}
+
+// 8.1
+// Use the for-of loop to loop over the books array and sum the pages of all books. Use the pageSum variable below, and the pages property of the book objects.
+// let pageSum = 0;
+console.log("8.1");
+
+let pageSum = 0;
+for (const { pages } of books) {
+  pageSum += pages;
+}
+console.log(`All pages ${pageSum}`);
+
+// 8.2
+// Below is the allAuthors variable which stores an empty array. Use the for-of loop to fill allAuthors with the authors of each book from the books array.
+// Remember that each book object has the author property, which can be a string (if there is only a single author) or an array (if there are multiple authors). You may need to use the typeof operator. You can also use multiple loops if needed. The allAuthors array should have just one level (no nested arrays).
+// const allAuthors = [];
+
+const allAuthors = [];
+for (const { author } of books) {
+  if (typeof author === "string") {
+    allAuthors.push(author);
+  } else if (Array.isArray(author)) {
+    allAuthors.push(...author);
+  }
+}
+console.log(allAuthors);
