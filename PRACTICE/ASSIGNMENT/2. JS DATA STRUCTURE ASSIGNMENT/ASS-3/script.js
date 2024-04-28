@@ -407,3 +407,4 @@ const getFirstKeyword = function (book) {
 console.log(getFirstKeyword(books[0]));
 console.log(getFirstKeyword(newBook2));
 
+
