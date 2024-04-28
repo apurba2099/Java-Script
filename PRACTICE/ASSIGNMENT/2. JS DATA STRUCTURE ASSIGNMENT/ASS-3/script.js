@@ -287,14 +287,10 @@ for (const book of books) {
 // Use the &&= operator (tip: you may also need the ! operator)
 console.log("7.2");
 
-// for (const {
-//   thirdParty: {
-//     goodreads: { rating },
-//   },
-//   highlighted,
-// } of books) {
+// for (const { thirdParty:{goodreads:{rating}}, highlighted } of books) {
 //   rating &&= (highlighted = false);
 // }
+// console.log(thirdParty.goodreads.rating);
 for (const book of books) {
   if (
     book.thirdParty &&
@@ -331,3 +327,83 @@ for (const { author } of books) {
   }
 }
 console.log(allAuthors);
+
+// 8.3
+// Use the for-of loop together with Array's entries() method to log each author from allAuthors to the console together with its index. Make the index start from 1, instead of 0.
+// Expected Output:
+// 1. Robert Sedgewick
+// 2. Kevin Wayne
+// 3. Harold Abelson
+//    ...                    // part removed for clarity
+// 15. Cal Newport
+
+console.log("8.2");
+for (const [index, author] of allAuthors.entries()) {
+  console.log(`${index + 1} no. ${author}`);
+}
+
+// 9.1
+// Below is the bookData array that contains other arrays. Each inner array consists of the property name (first element), and the value (second element). For example, in ['title', 'Computer Networking: A Top-Down Approach'], 'title' is the property name, and 'Computer Networking: A Top-Down Approach' is meant to be the value assigned to that property name.
+// Using computed properties, fill the newBook object with the properties and values from the bookData array. The first one is done already.
+
+// const bookData = [
+//   ['title', 'Computer Networking: A Top-Down Approach'],
+//   ['author', ['James F. Kurose', 'Keith W. Ross']],
+//   ['publisher', 'Addison Wesley'],
+// ];
+// // Do the rest
+// const newBook = {
+//   [bookData[0][0]]: bookData[0][1]
+//   // ...
+// };
+console.log("9.1");
+const bookData = [
+  ["title", "Computer Networking: A Top-Down Approach"],
+  ["author", ["James F. Kurose", "Keith W. Ross"]],
+  ["publisher", "Addison Wesley"],
+];
+const newBook = {
+  [bookData[0][0]]: bookData[0][1],
+  [bookData[1][0]]: bookData[1][1],
+  [bookData[2][0]]: bookData[2][1],
+};
+console.table(newBook);
+
+// 9.2
+// Below is the pages variable. Add it as a property of the newBook2 object. Use the shorter way.
+// const pages = 880;
+
+// const newBook2 = {
+//   title: 'The C Programming Language',
+//   author: ['Brian W. Kernighan', 'Dennis M. Ritchie'],
+//   // ...
+// }
+
+const pages = 880;
+
+const newBook2 = {
+  title: "The C Programming Language",
+  author: ["Brian W. Kernighan", "Dennis M. Ritchie"],
+  pages,
+};
+console.table(newBook2);
+
+// 10.1
+// Write a function called getFirstKeyword that takes the book object as an argument. This function should return the first keyword from the book's keywords property (array) or undefined (if the keywords property doesn't exist). It shouldn't throw an error. Use optional chaining for that.
+// Example 1:
+// getFirstKeyword(book[0]);
+// Expected Output:
+// "computer science"
+// Example 2:
+// getFirstKeyword(newBook2); // from previous tasks
+// Expected Output:
+// Undefined
+console.log("10.1");
+
+const getFirstKeyword = function (book) {
+  return book.keywords?.[0];
+};
+
+console.log(getFirstKeyword(books[0]));
+console.log(getFirstKeyword(newBook2));
+
