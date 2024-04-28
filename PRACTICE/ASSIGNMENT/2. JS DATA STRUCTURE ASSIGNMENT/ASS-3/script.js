@@ -317,12 +317,13 @@ console.log(`All pages ${pageSum}`);
 // Below is the allAuthors variable which stores an empty array. Use the for-of loop to fill allAuthors with the authors of each book from the books array.
 // Remember that each book object has the author property, which can be a string (if there is only a single author) or an array (if there are multiple authors). You may need to use the typeof operator. You can also use multiple loops if needed. The allAuthors array should have just one level (no nested arrays).
 // const allAuthors = [];
+console.log("8.2");
 
 const allAuthors = [];
 for (const { author } of books) {
   if (typeof author === "string") {
     allAuthors.push(author);
-  } else if (Array.isArray(author)) {
+  } else if (author) {
     allAuthors.push(...author);
   }
 }
@@ -407,4 +408,16 @@ const getFirstKeyword = function (book) {
 console.log(getFirstKeyword(books[0]));
 console.log(getFirstKeyword(newBook2));
 
+// 11.1
+// Below is the entries variable that stores an empty array. Use the for-of loop together with the Object.keys() method to loop over the thirdParty.goodreads property (array) of the first book object from the books array. For each key, push a new array that contains that key to the entries array.
+// In the end, the entries array should be filled with arrays containing keys like below:
+// [['rating'],['ratingsCount'],['reviewsCount'],'fiveStartRatingCount'],['oneStartRatingCount']]
+// const entries = [];
+console.log("11.1");
 
+const entries = [];
+const keys = Object.keys(books[0].thirdParty.goodreads);
+for (const key of keys) {
+  entries.push(key);
+}
+console.log(entries);
