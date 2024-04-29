@@ -436,4 +436,83 @@ console.log(entries2);
 // 12.1
 // Below is the allKeywords variable, which stores an empty array. Loop over the books array, and fill the allKeywords array with the keywords coming from the keywords property of each book object. The allKeywords array should have just one level (no nested arrays). Use whatever loop and methods you want. You can also use the spread syntax. In the end, the allKeywords array should look more or less like this: ['computer science', 'programming', 'algorithms', 'data structures', ...].
 // const allKeywords = [];
+console.log("12.1");
 
+const allKeywords = [];
+for (const book of books) {
+  allKeywords.push(...book.keywords);
+}
+console.log(allKeywords);
+
+// 12.2
+// The allKeyword array contains duplicates. Remove them by creating a Set out of that array. Assign the newly created set to the uniqueKeywords variable.
+console.log("12.2");
+const uniqueKeywords = new Set(allKeywords);
+console.log(uniqueKeywords);
+
+// 12.3
+// Add two more keywords to the uniqueKeywords set, for example, 'coding' and 'science'.
+console.log("12.3");
+
+uniqueKeywords.add("coding");
+uniqueKeywords.add("science");
+console.log(uniqueKeywords);
+
+// 12.4
+// Delete 'business' from the uniqueKeywords set.
+console.log("12.4");
+uniqueKeywords.delete("business");
+console.log(uniqueKeywords);
+
+// 12.5
+// Create an array out of the uniqueKeywords set, and assign it to the uniqueKeywordsArr variable.
+console.log("12.5");
+const uniqueKeywordsArr = [...uniqueKeywords];
+console.log(uniqueKeywordsArr);
+
+// 12.6
+// Create an array out of the uniqueKeywords set, and assign it to the uniqueKeywordsArr variable.
+console.log("12.6");
+uniqueKeywords.clear();
+console.log(uniqueKeywords);
+
+// 13.1
+// Create a new book, but this time, as a Map. Assign it to the bookMap variable. Use this array as initial data:
+// [['title', 'Clean Code'], ['author', 'Robert C. Martin']]
+console.log("13.1");
+const bookMap = new Map();
+bookMap.set("title", "Clean Code").set("author", "Robert C. Martin");
+console.log(bookMap);
+
+// 13.2
+// Set a new key in bookMap called pages, and assign it with a number 464.
+console.log("13.2");
+bookMap.set("Pages", 464);
+console.log(bookMap);
+
+// 13.4
+// Get the size of bookMap, and log it to the console
+console.log("13.4");
+console.log("BookMap Size:", bookMap.size);
+
+// 13.5
+// Check if bookMap has the author key. and if so, log "The author of the book is known" to the console.
+console.log("13.5");
+if (bookMap.has("author")) {
+  console.log(`The author of the book is known`);
+}
+
+// 14.1
+// Convert the first book object from the books array into a Map, and assign it to a firstBookMap variable.
+console.log("14.1");
+const firstBookMap = new Map(Object.entries(books[0]));
+console.log(firstBookMap);
+// 14.2
+// Use the for-of loop to iterate over firstBookMap, and console.log the keys that have numbers as values.
+console.log("14.2");
+for (const [key, value] of firstBookMap) {
+  // console.log(key,value);
+  if (typeof value == "number") {
+    console.log(key);
+  }
+}
