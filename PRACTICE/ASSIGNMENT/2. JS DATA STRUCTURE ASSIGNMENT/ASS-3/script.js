@@ -490,6 +490,11 @@ console.log("13.2");
 bookMap.set("Pages", 464);
 console.log(bookMap);
 
+// 13.3
+// Get the title and author values from bookMap, and log to the console a string formatted like that: "${title} by ${author}".4
+
+console.log(`${bookMap.get("title")} by ${bookMap.get("author")}`);
+
 // 13.4
 // Get the size of bookMap, and log it to the console
 console.log("13.4");
