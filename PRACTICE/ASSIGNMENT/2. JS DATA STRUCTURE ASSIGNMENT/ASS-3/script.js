@@ -287,19 +287,9 @@ for (const book of books) {
 // Use the &&= operator (tip: you may also need the ! operator)
 console.log("7.2");
 
-// for (const { thirdParty:{goodreads:{rating}}, highlighted } of books) {
-//   rating &&= (highlighted = false);
-// }
-// console.log(thirdParty.goodreads.rating);
 for (const book of books) {
-  if (
-    book.thirdParty &&
-    book.thirdParty.goodreads &&
-    book.thirdParty.goodreads.rating < 4.2
-  ) {
-    book.highlighted = false;
-  }
-  console.table(book);
+  book.highlighted &&= !(book.thirdParty.goodreads.rating < 4.2);
+  console.log(book);
 }
 
 // 8.1
@@ -338,7 +328,7 @@ console.log(allAuthors);
 //    ...                    // part removed for clarity
 // 15. Cal Newport
 
-console.log("8.2");
+console.log("8.3");
 for (const [index, author] of allAuthors.entries()) {
   console.log(`${index + 1} no. ${author}`);
 }
@@ -418,6 +408,32 @@ console.log("11.1");
 const entries = [];
 const keys = Object.keys(books[0].thirdParty.goodreads);
 for (const key of keys) {
-  entries.push(key);
+  entries.push([key]);
 }
 console.log(entries);
+
+// 11.2
+// SideNote: The Object.values() method returns an array, which means you can call the Array's entries() method on it, for example, Object.entries(books[0].thirdParty.goodreads).entries(). The Array's entries() method returns [index, value] arrays for each element in the array.
+
+// Use the for-of loop together with the Object.values() method and Array's entries() method to loop over thirdParty.goodreads property of the first book from the books array.
+// Push each value to the appropriate inner array in the entries array (use index from entries()).
+console.log("11.2");
+const key = Object.values(books[0].thirdParty.goodreads).entries();
+for (const [index, value] of key) {
+  // console.log(index,value);
+  const entry = entries[index];
+  if (entry) entry.push[value];
+}
+// 11.3
+// Use the Object.entries() method on the thirdParty.goodreads property of the first book from the books array. Assign the returned value to the variable called entries2.
+console.log("11.3");
+const entries2 = Object.entries(books[0].thirdParty.goodreads);
+
+// Log the entries and entries2 variables to the console, and compare them. They should look the same.
+console.log(entries);
+console.log(entries2);
+
+// 12.1
+// Below is the allKeywords variable, which stores an empty array. Loop over the books array, and fill the allKeywords array with the keywords coming from the keywords property of each book object. The allKeywords array should have just one level (no nested arrays). Use whatever loop and methods you want. You can also use the spread syntax. In the end, the allKeywords array should look more or less like this: ['computer science', 'programming', 'algorithms', 'data structures', ...].
+// const allKeywords = [];
+
