@@ -282,3 +282,76 @@ normalizeAuthorName("JuliE sussMan (Contributor)");
 
 // 16.2
 // Take the title of the second book (books[1]) from the books array, and replace the word "Programs" with "Software". Assign the new string to the newBookTitle variable.
+
+const { title: newBookTitle } = books[1];
+console.log(newBookTitle.replace("Programs", "Software"));
+
+// 16.3
+// Write a function called logBookTheme that takes book's title (string), and logs to the console:
+// "This book is about computers" if the title starts with the word "computer",
+// "This book is about algorithms and data structures" if the title includes both the "algorithms" and "structures" words,
+// and, "This book is about some systems, but definitely not about operating systems" if the title ends with the word "system" or "systems", but doesn't include the word "operating".
+// The title may contain both small and capital letters.
+
+const logBookTheme = function (title) {
+  const lowerTitle = title.toLowerCase();
+  if (lowerTitle.startsWith("computer")) {
+    console.log("This book is about computers");
+  } else if (
+    lowerTitle.includes("algorithms") &&
+    lowerTitle.includes("structures")
+  ) {
+    console.log("This book is about algorithms and data structures");
+  } else if (lowerTitle.endsWith("system") || lowerTitle.endsWith("systems")) {
+    console.log(
+      "This book is about some systems, but definitely not about operating systems"
+    );
+  }
+};
+logBookTheme("Computer Science");
+logBookTheme("Algorithms and Data Structures");
+logBookTheme("Operating Systems");
+logBookTheme("Systems and Architechture");
+
+// 17.1
+// Below is the bookCategories variable that stores a string of categories. Each category is separated with a semicolon, for example, in a string "science;computing", 'science' and 'computing' are separate categories.
+// Write a function called logBookCategories that takes a string of categories separated with semicolons, and logs each category to the console (as separate strings).
+// Example :
+// const bookCategories = 'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
+// logBookCategories(bookCategories);
+// Expected Output:
+// science
+// computing
+// computer science
+// algorithms
+// business
+// operating systems
+// networking
+// electronics
+
+const logBookCategories = function (categories) {
+  const categoryArray = categories.split(";");
+  for (const category of categoryArray) {
+    console.log(category);
+  }
+};
+const bookCategories =
+  "science;computing;computer science;algorithms;business;operating systems;networking;electronics";
+logBookCategories(bookCategories);
+//////////////////////
+// just for check
+// const a = bookCategories.split(";");
+// // console.log(a);
+// const b = a.join();
+// // console.log(b);
+// for (const c of a){
+//   console.log(c);
+// }
+
+// 17.2
+// Now, the opposite. Each book from the books array has the keywords property.
+// Write a function called getKeywordsAsString that takes the books array as an argument, collects keywords from each book, removes duplicates, and then joins them to create a single string where keywords are separated by a semicolon.
+// Example :
+// getKeywordsAsString(books);
+// Expected Output:
+// computer science;programming;algorithms;data structures;java;math;software;engineering;javascript;computer systems;C;operating systems;Java;mathematics;business;compilers;interpreters;work;focus;personal development
