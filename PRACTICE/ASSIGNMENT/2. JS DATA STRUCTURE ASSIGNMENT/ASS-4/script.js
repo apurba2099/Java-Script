@@ -355,3 +355,10 @@ logBookCategories(bookCategories);
 // getKeywordsAsString(books);
 // Expected Output:
 // computer science;programming;algorithms;data structures;java;math;software;engineering;javascript;computer systems;C;operating systems;Java;mathematics;business;compilers;interpreters;work;focus;personal development
+const getKeywordsAsString = function (keywords) {
+  keywords = books.keywords.join(";");
+  for (const display of keywords) {
+    console.log(display);
+  }
+};
+getKeywordsAsString(books);
