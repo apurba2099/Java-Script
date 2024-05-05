@@ -69,3 +69,6 @@ printGoals("Davis", "Muller", "Lewandowski", "Kimmich");
 printGoals(game.scored);
 
 // task-7
+const moreLikelyToWin =
+  teamOdd1 < teamOdd2 ? game.team1 : teamOdd2 < teamOdd1 ? game.team2 : "Draw";
+console.log(`${moreLikelyToWin} is more likely to win based on odds.`);
