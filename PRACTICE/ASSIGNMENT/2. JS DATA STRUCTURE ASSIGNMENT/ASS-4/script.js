@@ -355,10 +355,44 @@ logBookCategories(bookCategories);
 // getKeywordsAsString(books);
 // Expected Output:
 // computer science;programming;algorithms;data structures;java;math;software;engineering;javascript;computer systems;C;operating systems;Java;mathematics;business;compilers;interpreters;work;focus;personal development
-const getKeywordsAsString = function (keywords) {
-  keywords = books.keywords.join(";");
-  for (const display of keywords) {
-    console.log(display);
-  }
+
+const getKeywordsAsString = function (books) {
+  let unique = "";
+  const uniKeywords = [];
+  for (const { keywords } of books) uniKeywords.push(...keywords);
+  const uniqueKey = [...new Set(uniKeywords)];
+  unique += uniqueKey.join(";");
+  console.log(unique);
 };
 getKeywordsAsString(books);
+
+// 17.3
+// Below is the bookChapters array that contains inner arrays. Each inner array consists of a chapter's title, and the number of a page, for example, in ['The Basics', 14], 'The Basics' is the chapter's title, and 14 is the number of a page.
+
+// Write a function called logBookChapters that takes an array of arrays (like bookChapters) as an argument, and logs each chapter's name to the console together with the page number. The page number should be separated from the chapter's name with underscores (take a look at the example below).
+
+// Example :
+// const bookChapters = [['The Basics', 14], ['Sorting', 254], ['Searching', 372], ['Graphs', 526], ['Strings', 706]];
+// logBookChapters(bookChapters);
+// Expected Output:
+// The Basics__________ 14
+// Sorting_____________ 254
+// Searching___________ 372
+// Graphs______________ 526
+// Strings_____________ 706
+
+const bookChapters = [
+  ["The Basics", 14],
+  ["Sorting", 254],
+  ["Searching", 372],
+  ["Graphs", 526],
+  ["Strings", 706],
+];
+
+const logBookChapters = function () {
+  for (const [chapter, pages] of bookChapters) {
+    console.log(`${chapter}______${pages}`);
+  }
+};
+
+logBookChapters(bookCategories);
