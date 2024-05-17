@@ -103,7 +103,7 @@ header nav .login .login_btn:active {
   gap: 5rem;
 
   /* NOTE: This creates the fade in-out animation */
-  opacity: 0;
+  /* opacity: 0; */
   transition: all 1s;
 }
 

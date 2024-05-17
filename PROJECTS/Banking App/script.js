@@ -69,3 +69,44 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
+
+const displayTransaction = function (transaction) {
+  containerTransactions.innerHTML = '';
+  transaction.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const html = `<div class="transaction_row">
+              <div class="transaction_type transaction_type--${type}">
+                ${i + 1} ${type}
+              </div>
+              <div class="transaction_date">3 days ago</div>
+              <div class="transaction_value">${mov}₹</div>
+            </div>`;
+    // console.log(html);
+    containerTransactions.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayTransaction(account1.transactions);
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+// console.log(accounts);
+
+// const transaction = [100, 200, -200, -400, 400];
+// const arr = [];
+// for (const amount of transaction) {
+//   if (amount > 0) {
+//     arr.push(amount);
+//   }
+// }
+// console.log(arr);
+
+// const withdrawal = account1.transactions.filter(amount => amount < 0);
+// console.log(withdrawal);
