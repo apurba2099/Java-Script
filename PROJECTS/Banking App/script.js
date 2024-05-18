@@ -70,6 +70,7 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+//Display transactions list
 const displayTransaction = function (transaction) {
   containerTransactions.innerHTML = '';
   transaction.forEach(function (mov, i) {
@@ -85,8 +86,9 @@ const displayTransaction = function (transaction) {
     containerTransactions.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayTransaction(account1.transactions);
+// displayTransaction(account1.transactions);
 
+//Create username
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -97,16 +99,68 @@ const createUsernames = function (accs) {
   });
 };
 createUsernames(accounts);
-// console.log(accounts);
 
-// const transaction = [100, 200, -200, -400, 400];
-// const arr = [];
-// for (const amount of transaction) {
-//   if (amount > 0) {
-//     arr.push(amount);
-//   }
-// }
-// console.log(arr);
+//Display account balance
+const calcDisplayBalance = function (transaction) {
+  const balance = transaction.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance}₹`;
+};
+// calcDisplayBalance(account1.transactions);
 
-// const withdrawal = account1.transactions.filter(amount => amount < 0);
-// console.log(withdrawal);
+//Total deposit In & Out
+const calculateDisplaySummary = function (acc) {
+  const income = acc.transactions
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `${income}₹`;
+  const outcome = acc.transactions
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumOut.textContent = `${Math.abs(outcome)}₹`;
+
+  //Calculate Intrest
+  const intrest = acc.transactions
+    .filter(mov => mov > 0)
+    .map(deposite => (deposite * acc.interestRate) / 100)
+    .filter(int => int >= 1)
+    .reduce((acc, int) => acc + int, 0);
+
+  labelSumInterest.textContent = `${intrest}₹`;
+};
+// calculateDisplaySummary(account1.transactions);
+
+//Event Handler
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc =>
+      acc.username === inputLoginUsername.value &&
+      acc.pin === Number(inputLoginPin.value)
+  );
+  if (currentAccount) {
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    //Display UI and Messages
+    containerApp.style.opacity = 100;
+    inputLoginUsername.value = inputLoginPin.value = '';
+
+    //Field Focus remove
+    inputLoginPin.blur();
+
+    //Display Transaction
+    displayTransaction(currentAccount.transactions);
+
+    //Display balance
+    calcDisplayBalance(currentAccount.transactions);
+
+    //Display Summary
+    calculateDisplaySummary(currentAccount);
+  }
+
+  // console.log(currentAccount);
+});
