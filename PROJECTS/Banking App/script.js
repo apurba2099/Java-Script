@@ -112,12 +112,10 @@ const calculateDisplaySummary = function (acc) {
   const income = acc.transactions
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-
   labelSumIn.textContent = `${income}₹`;
   const outcome = acc.transactions
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-
   labelSumOut.textContent = `${Math.abs(outcome)}₹`;
 
   //Calculate Intrest
@@ -135,7 +133,6 @@ const calculateDisplaySummary = function (acc) {
 let currentAccount;
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
-
   currentAccount = accounts.find(
     acc =>
       acc.username === inputLoginUsername.value &&
@@ -148,19 +145,18 @@ btnLogin.addEventListener('click', function (e) {
     //Display UI and Messages
     containerApp.style.opacity = 100;
     inputLoginUsername.value = inputLoginPin.value = '';
-
     //Field Focus remove
     inputLoginPin.blur();
-
     //Display Transaction
     displayTransaction(currentAccount.transactions);
-
     //Display balance
     calcDisplayBalance(currentAccount.transactions);
-
     //Display Summary
     calculateDisplaySummary(currentAccount);
+    //Display Username
+    debitOwner.textContent = currentAccount.owner;
+    //Display valid Date
+    debitValidity.textContent = currentAccount.cardValidity;
   }
-
   // console.log(currentAccount);
 });
