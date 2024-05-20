@@ -37,7 +37,16 @@ const account4 = {
   cardValidity: '08/25',
 };
 
-const accounts = [account1, account2, account3, account4];
+const account5 = {
+  owner: 'Apurba Dutta',
+  transactions: [43, 100, 70, 500, 900],
+  interestRate: 1,
+  pin: 5555,
+  cardNumber: '6295324395622003',
+  cardValidity: '08/26',
+};
+
+const accounts = [account1, account2, account3, account4, account5];
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -71,9 +80,12 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 //Display transactions list
-const displayTransaction = function (transaction) {
+const displayTransaction = function (transactions, sort = false) {
   containerTransactions.innerHTML = '';
-  transaction.forEach(function (mov, i) {
+
+  const movs = sort ? transactions.slice().sort((a, b) => a - b) : transactions;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `<div class="transaction_row">
               <div class="transaction_type transaction_type--${type}">
@@ -101,9 +113,9 @@ const createUsernames = function (accs) {
 createUsernames(accounts);
 
 //Display account balance
-const calcDisplayBalance = function (transaction) {
-  const balance = transaction.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance}₹`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.transactions.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance}₹`;
 };
 // calcDisplayBalance(account1.transactions);
 
@@ -129,7 +141,16 @@ const calculateDisplaySummary = function (acc) {
 };
 // calculateDisplaySummary(account1.transactions);
 
-//Event Handler
+const upDateUi = function (acc) {
+  //  Display Transaction
+  displayTransaction(acc.transactions);
+  //Display balance
+  calcDisplayBalance(currentAccount);
+  //Display Summary
+  calculateDisplaySummary(currentAccount);
+};
+
+//loging
 let currentAccount;
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -147,16 +168,87 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     //Field Focus remove
     inputLoginPin.blur();
-    //Display Transaction
-    displayTransaction(currentAccount.transactions);
-    //Display balance
-    calcDisplayBalance(currentAccount.transactions);
-    //Display Summary
-    calculateDisplaySummary(currentAccount);
+    //Update UI
+    upDateUi(currentAccount);
     //Display Username
     debitOwner.textContent = currentAccount.owner;
     //Display valid Date
     debitValidity.textContent = currentAccount.cardValidity;
   }
   // console.log(currentAccount);
+});
+
+//transfer money
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  console.log(amount, receiverAcc);
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    currentAccount.transactions.push(-amount);
+    receiverAcc.transactions.push(amount);
+    //Update UI
+    upDateUi(currentAccount);
+  }
+});
+
+//Request Loan
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  if (
+    amount > 1000 &&
+    currentAccount.transactions.some(mov => mov >= amount * 0.1)
+  ) {
+    //Add transactions
+    currentAccount.transactions.push(amount);
+    //Update Ui
+    upDateUi(currentAccount);
+  }
+  //Clear input fields
+  inputLoanAmount.value = '';
+});
+
+//Close account
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    //Delete Account
+    accounts.splice(index, 1);
+    //Hide UI message
+    containerApp.style.opacity = 0;
+    labelWelcome.textContent = `Log In To Get Started`;
+    //Clear Input Fields
+    inputCloseUsername.value = inputClosePin.value = '';
+  }
+});
+
+//Sort button features
+let sorted;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayTransaction(currentAccount.transactions, true);
+
+  displayTransaction(currentAccount.transactions, !sorted);
+  sorted = !sorted;
+});
+
+//button logout
+btnLogout.addEventListener('click', function (e) {
+  e.preventDefault();
+  containerApp.style.opacity = 0;
+  labelWelcome.textContent = `Log In To Get Started`;
 });
