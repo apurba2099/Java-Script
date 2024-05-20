@@ -58,7 +58,7 @@ const labelSumInterest = document.querySelector('.summary_value--interest');
 const labelTimer = document.querySelector('.timer');
 
 const debitOwner = document.querySelector('.debit_card--name');
-// const debitNumber = document.querySelector('.debit_card--number');
+const debitNumber = document.querySelector('.debit_card--number');
 const debitValidity = document.querySelector('.debit_card--date');
 
 const containerApp = document.querySelector('.app');
@@ -255,16 +255,18 @@ btnLogout.addEventListener('click', function (e) {
 
 function maskDebitCardCode(debitCardCode) {
   if (debitCardCode.length !== 16) {
-    console.log('Debit card code must be 16 digits long');
+    console.log('wrong!');
   }
   let maskedArray = debitCardCode.split('');
   for (let i = 0; i < 12; i++) {
     maskedArray[i] = '*';
   }
+  console.log(maskedArray);
   let maskedCode = maskedArray.join('');
+  console.log(maskedCode);
   return maskedCode;
 }
-const debitNumberElement = document.querySelector('.debit_card--number');
-const debitCardCode = debitNumberElement.textContent.trim();
+const debitCardCode = debitNumber.textContent.trim();
 const maskedCode = maskDebitCardCode(debitCardCode);
-debitNumberElement.textContent = maskedCode;
+//masked code
+debitNumber.textContent = maskedCode;
