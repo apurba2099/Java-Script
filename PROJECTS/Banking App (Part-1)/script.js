@@ -261,11 +261,10 @@ function maskDebitCardCode(debitCardCode) {
   for (let i = 0; i < 12; i++) {
     maskedArray[i] = '*';
   }
-  console.log(maskedArray);
   let maskedCode = maskedArray.join('');
-  console.log(maskedCode);
   return maskedCode;
 }
+
 const debitCardCode = debitNumber.textContent.trim();
 const maskedCode = maskDebitCardCode(debitCardCode);
 //masked code
