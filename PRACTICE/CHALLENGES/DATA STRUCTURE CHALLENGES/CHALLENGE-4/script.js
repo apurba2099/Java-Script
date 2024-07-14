@@ -3,7 +3,7 @@
 // document.body.append(document.createElement("button"));
 
 const submitBtn = document.querySelector(".btn");
-const textarea = document.querySelector(".areatext").value;
+// const textarea = document.querySelector(".areatext").value;
 
 submitBtn.addEventListener("click", function () {
   const text = document.getElementById("textarea").value;
