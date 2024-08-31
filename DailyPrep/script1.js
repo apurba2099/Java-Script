@@ -57,3 +57,11 @@ const Subjectmarks = function (bangla, english, math, biology, physics, chemistr
 }
 console.log(Subjectmarks(60,67,80,80,98,70));
 
+
+//array 
+const a = "apurba"
+const b = "avishek"
+const c = "niranjan"
+
+const family = [a,b,c]
+console.log(family) 
