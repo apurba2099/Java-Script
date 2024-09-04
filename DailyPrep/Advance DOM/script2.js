@@ -1,5 +1,6 @@
 //Advance DOM manipulation
 "use-strict";
+// 187. no class
 //CREATEING ELEMENT
 
 const father1 = document.querySelector(".father1");
@@ -26,3 +27,21 @@ btn.addEventListener("click", function () {
   btn.remove();
   //   child1.father1.removeChild(child1);
 });
+
+//188. no class
+// Styles, Attributes, Classes
+
+//style:-
+
+child.style.backgroundColor = "green";
+child.style.width = "110%";
+
+child.style.height =
+  Number.parseFloat(getComputedStyle(child).height, 10) + 50 + "px";
+
+console.log(getComputedStyle(child).height);
+// console.log(child.style.height =
+//   Number.parseFloat(getComputedStyle(child).height, 10) + 50 + "px")
+
+// setproperty color
+document.documentElement.style.setProperty("--allColor", "blue");

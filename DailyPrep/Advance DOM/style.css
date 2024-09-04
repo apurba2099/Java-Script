@@ -1,0 +1,26 @@
+:root {
+  --allColor: green;
+}
+
+.father1 {
+  background-color: blue;
+  width: 130px;
+}
+.father2 {
+  background-color: red;
+  width: 130px;
+}
+.btn {
+  font-size: 1.3rem;
+  width: 100px;
+  border: none;
+  color: white;
+  background-color: black;
+  padding: 10px;
+}
+
+.color {
+  background-color: var(--allColor);
+  height: 100px;
+  width: 100px;
+}
