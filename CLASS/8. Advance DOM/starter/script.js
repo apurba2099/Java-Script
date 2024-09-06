@@ -30,9 +30,41 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+//Advance DOM
+// class - 188 Styles and Attributes
 
-//Advance DOM 
-// class - 188 
+//Attributes
 
-//Style
-message.sty
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+
+logo.alt = 'beutiful picture';
+
+// Non-Standard
+console.log(logo.designer);
+console.log(logo.getAttribute('designer'));
+//opposite of getAttribute() is setAttribute
+logo.setAttribute('company', 'Bankist');
+// setAttribute("attribute name", "value name")
+
+console.log(logo.src);
+console.log(logo.getAttribute('src'));
+
+const link = document.querySelector('.twitter-link');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+// Data Attributes
+console.log(logo.dataset.versionNumber); //data-version-number
+
+// Classes
+logo.classList.add('a', 'b', 'c');
+logo.classList.remove('c');
+logo.classList.toggle('c');
+logo.classList.contains('c'); //not includes
+
+// Don't use
+//cause its overright the all class name
+// logo.className = 'Apurba';
