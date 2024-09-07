@@ -30,9 +30,9 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+////////////////////////////////////////
 // //Advance DOM MANIPULATION
 // // class - 188 Styles and Attributes
-
 // //Attributes
 
 // const logo = document.querySelector('.nav__logo');
@@ -69,8 +69,8 @@ document.addEventListener('keydown', function (e) {
 // //cause its overright the all class name
 // // logo.className = 'Apurba';
 
+///////////////////////////////////////
 ////START PROJECT////
-
 // 1. Smooth Scrolling features//
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
@@ -86,37 +86,67 @@ btnScrollTo.addEventListener('click', function (e) {
   //   document.documentElement.clientHeight,
   //   document.documentElement.clientWidth
   // );
-  // // Scrolling
-  // // window.scrollTo(
-  // //   s1coords.left + window.pageXOffset,
-  // //   s1coords.top + window.pageYOffset
-  // // );
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
 
-  // // Old skool technique
-  // // window.scrollTo({
-  // //   left: s1coords.left + window.pageXOffset,
-  // //   top: s1coords.top + window.pageYOffset,
-  // //   behavior: 'smooth',
-  // // });
+  // Old skool technique
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
 
-  // New method to scrooll smooth
+  //** New method to scrooll smooth**
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-
-/// 190. Types of events and event handlers ///
+////////////////////////////////////////
+////* 190. Types of events and event handlers *///
 const h1 = document.querySelector('h1');
 
-// Advance - removeEventListener/
-const alertH1 = function (e) {
-  alert('You are in!!');
-};
-h1.addEventListener('mouseenter', alertH1);
+// // Advance - removeEventListener/
+// const alertH1 = function (e) {
+//   alert('You are in!!');
+// };
+// h1.addEventListener('mouseenter', alertH1);
 
-setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+// // set a timing for 3 seconds
+// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 
 //Old skool method, better is addEventListner
 // h1.onmouseenter = function (e) {
 //   alert('Oops you out side!!');
 // };
 
+///////////////////////////////
+//** 192. Event Propagation and Bubbling concepts **//
+// rgb (255,255,255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+// console.log(randomColor());
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  // console.log(this);
+  console.log('LINKS', e.currentTarget);
+  // console.log('LINKS', e.target);
+
+  // **PROPAGATION CONCEPT: STOP PROPAGATION**
+  // e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target);
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAVBAR', e.target);
+});
