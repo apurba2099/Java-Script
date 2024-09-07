@@ -30,41 +30,93 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-//Advance DOM
-// class - 188 Styles and Attributes
+// //Advance DOM MANIPULATION
+// // class - 188 Styles and Attributes
 
-//Attributes
+// //Attributes
 
-const logo = document.querySelector('.nav__logo');
-console.log(logo.alt);
-console.log(logo.src);
-console.log(logo.className);
+// const logo = document.querySelector('.nav__logo');
+// console.log(logo.alt);
+// console.log(logo.src);
+// console.log(logo.className);
 
-logo.alt = 'beutiful picture';
+// logo.alt = 'beutiful picture';
 
-// Non-Standard
-console.log(logo.designer);
-console.log(logo.getAttribute('designer'));
-//opposite of getAttribute() is setAttribute
-logo.setAttribute('company', 'Bankist');
-// setAttribute("attribute name", "value name")
+// // Non-Standard
+// console.log(logo.designer);
+// console.log(logo.getAttribute('designer'));
+// //opposite of getAttribute() is setAttribute
+// logo.setAttribute('company', 'Bankist');
+// // setAttribute("attribute name", "value name")
 
-console.log(logo.src);
-console.log(logo.getAttribute('src'));
+// console.log(logo.src);
+// console.log(logo.getAttribute('src'));
 
-const link = document.querySelector('.twitter-link');
-console.log(link.href);
-console.log(link.getAttribute('href'));
+// const link = document.querySelector('.twitter-link');
+// console.log(link.href);
+// console.log(link.getAttribute('href'));
 
-// Data Attributes
-console.log(logo.dataset.versionNumber); //data-version-number
+// // Data Attributes
+// console.log(logo.dataset.versionNumber); //data-version-number
 
-// Classes
-logo.classList.add('a', 'b', 'c');
-logo.classList.remove('c');
-logo.classList.toggle('c');
-logo.classList.contains('c'); //not includes
+// // Classes
+// logo.classList.add('a', 'b', 'c');
+// logo.classList.remove('c');
+// logo.classList.toggle('c');
+// logo.classList.contains('c'); //not includes
 
-// Don't use
-//cause its overright the all class name
-// logo.className = 'Apurba';
+// // Don't use
+// //cause its overright the all class name
+// // logo.className = 'Apurba';
+
+////START PROJECT////
+
+// 1. Smooth Scrolling features//
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  // const s1coords = section1.getBoundingClientRect();
+  // console.log(s1coords);
+  // console.log(e.target.getBoundingClientRect());
+
+  // console.log('Curren Scroll (x/y): ', window.pageXOffset, window.pageYOffset);
+  // console.log(
+  //   'height/width viewport: ',
+  //   document.documentElement.clientHeight,
+  //   document.documentElement.clientWidth
+  // );
+  // // Scrolling
+  // // window.scrollTo(
+  // //   s1coords.left + window.pageXOffset,
+  // //   s1coords.top + window.pageYOffset
+  // // );
+
+  // // Old skool technique
+  // // window.scrollTo({
+  // //   left: s1coords.left + window.pageXOffset,
+  // //   top: s1coords.top + window.pageYOffset,
+  // //   behavior: 'smooth',
+  // // });
+
+  // New method to scrooll smooth
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+
+/// 190. Types of events and event handlers ///
+const h1 = document.querySelector('h1');
+
+// Advance - removeEventListener/
+const alertH1 = function (e) {
+  alert('You are in!!');
+};
+h1.addEventListener('mouseenter', alertH1);
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
+//Old skool method, better is addEventListner
+// h1.onmouseenter = function (e) {
+//   alert('Oops you out side!!');
+// };
+
