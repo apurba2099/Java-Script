@@ -187,7 +187,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   //Matching Technique/strategy
   if (e.target.classList.contains('nav__link')) {
     const id = e.target.getAttribute('href');
-    console.log(id);
+    // console.log(id);
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
@@ -258,3 +258,61 @@ tabsContainer.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+// 196. Passing Arguments to events handlers
+// Menu fade animations navbar
+const nav = document.querySelector('.nav');
+
+// Refactoring this code
+const handleOver = function (e, opacity) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = opacity;
+    });
+    logo.style.opacity = opacity;
+  }
+};
+nav.addEventListener('mouseover', function (e) {
+  handleOver(e, 0.5);
+});
+
+nav.addEventListener('mouseout', function (e) {
+  handleOver(e, 1);
+});
+
+// Two methods but we always use DRY Code
+// nav.addEventListener('mouseover', function (e) {
+//   if (e.target.classList.contains('nav__link')) {
+//     const link = e.target;
+
+//     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+
+//     const logo = link.closest('.nav').querySelector('img');
+
+//     siblings.forEach(el => {
+//       if (el !== link) el.style.opacity = 0.5;
+//     });
+//     logo.style.opacity = 0.5;
+//   }
+// });
+
+// nav.addEventListener('mouseout', function (e) {
+//   if (e.target.classList.contains('nav__link')) {
+//     const link = e.target;
+
+//     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+
+//     const logo = link.closest('.nav').querySelector('img');
+
+//     siblings.forEach(el => {
+//       if (el !== link) el.style.opacity = 1;
+//     });
+//     logo.style.opacity = 1;
+//   }
+// });
