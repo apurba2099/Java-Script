@@ -259,12 +259,13 @@ tabsContainer.addEventListener('click', function (e) {
     .classList.add('operations__content--active');
 });
 
-// 196. Passing Arguments to events handlers
+//** 196. Passing Arguments to events handlers **
 // Menu fade animations navbar
 const nav = document.querySelector('.nav');
 
 // Refactoring this code
 const handleOver = function (e, opacity) {
+  // console.log(this);
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
 
@@ -273,18 +274,26 @@ const handleOver = function (e, opacity) {
     const logo = link.closest('.nav').querySelector('img');
 
     siblings.forEach(el => {
-      if (el !== link) el.style.opacity = opacity;
+      if (el !== link) el.style.opacity = this;
     });
-    logo.style.opacity = opacity;
+    logo.style.opacity = this;
   }
 };
-nav.addEventListener('mouseover', function (e) {
-  handleOver(e, 0.5);
-});
 
-nav.addEventListener('mouseout', function (e) {
-  handleOver(e, 1);
-});
+//More advance techniuqe
+// Passing "argument" into handler
+
+nav.addEventListener('mouseover', handleOver.bind(0.5));
+
+nav.addEventListener('mouseout', handleOver.bind(1));
+
+// // These are the call back function
+// nav.addEventListener('mouseover', function (e) {
+//   handleOver(e, 0.5);
+// });
+// nav.addEventListener('mouseout', function (e) {
+//   handleOver(e, 1);
+// });
 
 // Two methods but we always use DRY Code
 // nav.addEventListener('mouseover', function (e) {
@@ -316,3 +325,13 @@ nav.addEventListener('mouseout', function (e) {
 //     logo.style.opacity = 1;
 //   }
 // });
+
+//**  197. Implementing a STICKY navigation: The scroll event **
+const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+
+window.addEventListener('scroll', function () {
+  console.log(window.scrollY);
+  if (this.window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.add('sticky');
+});
