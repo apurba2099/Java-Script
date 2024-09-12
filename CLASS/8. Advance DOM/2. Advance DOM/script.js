@@ -99,7 +99,7 @@ btnScrollTo.addEventListener('click', function (e) {
   //   behavior: 'smooth',
   // });
 
-  //** New method to scrooll smooth**
+  //** New method to Scrooll smooth**
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
@@ -124,29 +124,70 @@ const h1 = document.querySelector('h1');
 ///////////////////////////////
 //** 192. Event Propagation and Bubbling concepts **//
 // rgb (255,255,255)
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1)) + min;
 
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
-// console.log(randomColor());
+// const randomColor = () =>
+//   `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+// // console.log(randomColor());
 
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  // console.log(this);
-  console.log('LINKS', e.currentTarget);
-  // console.log('LINKS', e.target);
+// document.querySelector('.nav__link').addEventListener(
+//   'click',
+//   function (e) {
+//     this.style.backgroundColor = randomColor();
+//     // console.log(this);
+//     console.log('LINKS', e.currentTarget);
+//     // console.log('LINKS', e.target);
 
-  // **PROPAGATION CONCEPT: STOP PROPAGATION**
-  // e.stopPropagation();
-});
+//     // **PROPAGATION CONCEPT: STOP PROPAGATION**
+//     // e.stopPropagation();
+//   },
+//   // true
+// );
 
+// document.querySelector('.nav__links').addEventListener(
+//   'click',
+//   function (e) {
+//     this.style.backgroundColor = randomColor();
+//     console.log('CONTAINER', e.target);
+//   },
+//   // true
+// );
+
+// document.querySelector('.nav').addEventListener(
+//   'click',
+//   function (e) {
+//     this.style.backgroundColor = randomColor();
+//     console.log('NAVBAR', e.target);
+//   },
+//   // true
+// );
+
+///////////////////////////////
+//** 193. Event Delegation: Implementing page Navigation **//
+
+// Its normal nav__links are smooth scroll view
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     // console.log('LINK');
+//     const id = this.getAttribute('href');
+//     // console.log(id);
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+//** Its using Event Delegation Scroll View**
+// **NOTE :
+// 1. Add event listener to common parent element
+// 2. Determine what element orignated the event
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('CONTAINER', e.target);
-});
+  e.preventDefault();
 
-document.querySelector('.nav').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('NAVBAR', e.target);
+  //Matching Technique/strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
 });
