@@ -328,11 +328,38 @@ nav.addEventListener('mouseout', handleOver.bind(1));
 
 //**  197. Implementing a STICKY navigation: The scroll event **
 const initialCoords = section1.getBoundingClientRect();
-console.log(initialCoords);
+// console.log(initialCoords);
 
 window.addEventListener('scroll', function () {
-  console.log(window.scrollY);
+  // console.log(window.scrollY);
   if (this.window.scrollY > initialCoords.top) nav.classList.add('sticky');
   else nav.classList.add('sticky');
 });
 
+// 198. A better way: The Intersection Observer API
+//STICKY Navigation: Intersection Obeserver API
+
+// const observeCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+// const observerOptions = {
+//   root: null,
+//   threshold: [0, 1, 0.2],
+// };
+// const observer = new IntersectionObserver(observeCallback, observerOptions);
+// observer.observe(section1);
+
+const header = document.querySelector('.header');
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+};
+
+const headerobserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+});
+headerobserver.observe(header);
