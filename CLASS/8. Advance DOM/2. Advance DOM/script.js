@@ -391,7 +391,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 // 200. **Lazy Loading images in webpages very important **
@@ -400,19 +400,50 @@ const imgTargets = document.querySelectorAll('img[data-src]');
 
 const loadImg = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
   //guard clause
   if (!entry.isIntersecting) return;
 
   //Replace src with data-src
   entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target);
 };
 
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
+  rootMargin: '200px',
 });
 
 imgTargets.forEach(img => {
   imgObserver.observe(img);
+});
+
+// 201.** Building a slider Component part:1 **
+
+//Slider
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+let curSlide = 0;
+
+const sldier = document.querySelector('.slider');
+sldier.style.transform = 'scale(0.4) translateX(-800px)';
+
+sldier.style.overflow = 'visible';
+
+slides.forEach((s, i) => (s.style.transform = `transletX(${100 * i}%)`));
+// 0%, 100%, 200%, 300%
+
+// next sldie
+btnRight.addEventListener('click', function () {
+  curSlide++;
+  slides.forEach((s, i) => (s.style.transform = `transletX(${100 * (i- curSlide)}%)`));
+  // curSlide= 1: -100%, 0%, 100%, 200%
 });
