@@ -279,12 +279,9 @@ const handleOver = function (e, opacity) {
     logo.style.opacity = this;
   }
 };
-
 //More advance techniuqe
 // Passing "argument" into handler
-
 nav.addEventListener('mouseover', handleOver.bind(0.5));
-
 nav.addEventListener('mouseout', handleOver.bind(1));
 
 // // These are the call back function
@@ -400,7 +397,7 @@ const imgTargets = document.querySelectorAll('img[data-src]');
 
 const loadImg = function (entries, observer) {
   const [entry] = entries;
-  // console.log(entry);
+  console.log(entry);
   //guard clause
   if (!entry.isIntersecting) return;
 
