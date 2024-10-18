@@ -184,29 +184,63 @@ person.hey = function () {
 person.hey();
 */
 
+/*
 // 217. video Object.create
 const PersonProto = {
   calcAge() {
     console.log(2024 - this.birthYear);
   },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
 };
 
+// steven object
 const steven = Object.create(PersonProto);
 console.log(steven);
 steven.name = "Steven";
 steven.birthYear = 2003;
 steven.calcAge();
+console.log(PersonProto, steven.__proto__);
 
+// check true or flase
+console.log(steven.__proto__ === PersonProto); // true
 
+// sarah object
+const sarah = Object.create(PersonProto);
+sarah.name = "Sarah";
+sarah.birthYear = 2004;
+sarah.calcAge();
+console.log(sarah);
 
+// init method (just because dont use new operator)
+sarah.init("Sarah", 1999);
+sarah.calcAge()
 
-// const person = {
-//   firstName: "John",
-//   lastName: "Doe",
-// };
-// Create new Object
-// const man = Object.create(person);
-// man.firstName = "Peter";
-// man.lastName ="parker"
-// console.log(person);
-// console.log(man); 
+//geeks for geeks
+//create a first object
+// const apurba = {
+//   fname: 'Apurba',
+//   lname: 'Dutta',
+//   birthYear: 2003,
+//   Ph_no: 6295324395
+// }
+// console.log(apurba)
+
+// // second object Object.create
+// const avishek = Object.create(apurba);
+// avishek.fname = 'Avishek';
+// avishek.lname ='Dutta';
+// avishek.birthYear = 1996;
+// avishek.ph_no = 8250766104;
+// console.log(avishek)
+
+// function calcAge(){
+//       console.log(`this is the birth year ${2024-this.birthYear}`);
+//   }
+// apurba.calcAge = calcAge;
+// avishek.calcAge = calcAge;
+// apurba.calcAge();
+// avishek.calcAge();
+*/
