@@ -116,8 +116,29 @@ avishek.greet();
 // 3. classes are executed in strict mode
 */
 
+/*
 // 215 no video
 // Setters and Getters
+// class have and constructor to make
+class Details {
+  constructor(fullName, birthyear) {
+    this.fullName = fullName;
+    this.birthyear = birthyear;
+  }
+
+  // set a new fullName Function
+  set fullName(name) {
+    // console.log(name);
+    if (name.includes(" ")) this._fullName = name;
+    //this is a convention, this is not a js features diffrent variable name to avoid naming conflict _fullName.
+    else alert(`${name} is not a full name!`);
+  }
+
+  // get the return name
+  get fullName() {
+    return this._fullName;
+  }
+}
 
 const account = {
   owner: "apurba",
@@ -137,33 +158,55 @@ const account = {
     return 2024 - this.birthYear;
   },
 };
+// get and set console.log
 console.log(account.latest);
 account.latest = 50;
 console.log(account.movements);
 console.log(account.latest);
 console.log(account.age);
 
-// for better understanding here the example
+// new instance
+const jessica = new Details("jessica davis", 1996);
+console.log(jessica.fullName);
+// const walter = new Details("Walter", 1993);
+*/
 
-class details {
-  constractor(fullName, birthyear) {
-    this.fullName = fullName;
-    this.birthyear = birthyear;
-  }
+/*
+// 216. video Static methods
+const person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+person.hey = function () {
+  console.log("Hey There! 👌");
+  console.log(this) // call full constructor function
+};
+person.hey();
+*/
 
-  set fullName(name) {
-    // console.log(name);
-    if (name.includes("")) {
-      this._fullName = name;
-    } else {
-      alert(`${name} not a full name`);
-    }
-  }
-  get fullName() {
-    return this._fullName;
-  }
-}
-//correction needed
-const apurbaD = new details("Apurba Dutta", 2003);
-const avishekD = new details("Avishek Dutta", 1996);
-console.log(apurbaD.fullName);
+// 217. video Object.create
+const PersonProto = {
+  calcAge() {
+    console.log(2024 - this.birthYear);
+  },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = "Steven";
+steven.birthYear = 2003;
+steven.calcAge();
+
+
+
+
+// const person = {
+//   firstName: "John",
+//   lastName: "Doe",
+// };
+// Create new Object
+// const man = Object.create(person);
+// man.firstName = "Peter";
+// man.lastName ="parker"
+// console.log(person);
+// console.log(man); 
