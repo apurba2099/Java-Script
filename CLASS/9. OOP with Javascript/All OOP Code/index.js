@@ -244,3 +244,53 @@ sarah.calcAge()
 // apurba.calcAge();
 // avishek.calcAge();
 */
+
+/*
+// 219. no video
+// this a person constructor function
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2024 - this.birthYear);
+};
+
+// as same this is child student constructor function
+const Student = function (firstName, birthYear, course) {
+  // this.firstName = firstName;
+  // this.birthYear = birthYear;
+  // DRY CODE
+  Person.call(this, firstName, birthYear); // set the "Person.call()" method to call the parent constructor function
+
+  this.course = course; // additional property course
+};
+
+Student.prototype = Object.create(Person.prototype);
+
+//Linking prototype
+// Student.prototype = Person.prototype;
+
+// add this introduce function in Student constructor by the proptotype
+Student.prototype.introduce = function () {
+  console.log(
+    `My name ${this.firstName} and i study in ${this.course} and my age is ${
+      2024 - this.birthYear
+    }`
+  );
+};
+
+const apurba = new Student("Apurba", 2003, "Computer science");
+console.log(apurba);
+apurba.introduce();
+apurba.calcAge();
+
+console.log(apurba.__proto__);
+console.log(apurba.__proto__.__proto__);
+
+console.log(apurba instanceof Person, apurba instanceof Student, apurba instanceof Object);
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
+*/
