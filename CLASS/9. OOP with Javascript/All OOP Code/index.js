@@ -541,12 +541,12 @@ class Account {
 
   deposit(val) {
     this.#movements.push(val);
-    return this;
+    return this; // chaining methods
   }
 
   withdraw(val) {
     this.deposit(-val);
-    return this;
+    return this; // chaining methods
   }
 
   requestLoan(val) {
@@ -554,12 +554,12 @@ class Account {
     if (this._approveLoan(val)) {
       this.deposit(val);
       console.log(`Loan approved`);
-      return this;
+      return this; // chaining methods
     }
   }
 
   static helper() {
-    console.log('Helper');
+    console.log("Helper");
   }
 
   // 4) Private methods
@@ -569,7 +569,7 @@ class Account {
   }
 }
 
-const acc1 = new Account('Jonas', 'EUR', 1111);
+const acc1 = new Account("Jonas", "EUR", 1111);
 
 // acc1._movements.push(250);
 // acc1._movements.push(-140);
@@ -588,4 +588,10 @@ Account.helper();
 
 // console.log(acc1.#pin);
 // console.log(acc1.#approveLoan(100));
+
+
+// 226 no vide0
+// chaining methods
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(2500).withdraw(4000);
+// console.log(acc1.getMovements());
 */
