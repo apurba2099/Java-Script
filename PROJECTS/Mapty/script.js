@@ -21,11 +21,25 @@ if (navigator.geolocation)
 
       //   console.log(position);
       console.log(latitude, longitude);
-
       //   use google maps links
       console.table(
         `https://www.google.com/maps/@${latitude},${longitude},15z?entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D}`
       );
+
+      const coords = [latitude, longitude];
+
+      const map = L.map('map').setView(coords, 16); //(coords and zoom which will represent it by 15, and vrious what i want to show zoom)
+
+//there a different style in the map tiles openstreetmap.org/{z}
+      L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      L.marker(coords)
+        .addTo(map)
+        .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+        .openPopup();
     },
     function () {
       alert('Could not get your position!');
