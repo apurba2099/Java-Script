@@ -245,6 +245,8 @@ sarah.calcAge()
 // avishek.calcAge();
 */
 
+//-------------------------
+
 /*
 // 219. no video
 // this a person constructor function
@@ -294,3 +296,210 @@ console.log(apurba instanceof Person, apurba instanceof Student, apurba instance
 Student.prototype.constructor = Student;
 console.dir(Student.prototype.constructor);
 */
+
+//-------------------------
+
+/*
+// 221. no video
+// inheritance Between "classes". ES6 Classes
+
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+  get age() {
+    return 2024 - this.birthYear;
+  }
+  set fullName(name) {
+    if (name.includes(" ")) {
+      this._fullName = name;
+    } else {
+      console.error(`${name} is not a full name`);
+    }
+  }
+  get fullName() {
+    return this._fullName;
+  }
+  static hey() {
+    console.log(`hey there 👌`);
+  }
+  calcAge() {
+    return console.log(2024 - this.birthYear);
+  }
+}
+
+// now ES6 iherit this class to another
+class StudentCl extends PersonCl {
+  //extend keyword link with PersonCl with StudentCl inheritance
+  constructor(fullName, birthYear, course) {
+    // PersonCl.call() here we don't need to do that! we use super() function
+
+    // Always needs to happen first !
+    super(fullName, birthYear); //super is a basically the constructor function of the parent class.
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+  calcAge() {
+    console.log(
+      `I'm ${
+        2024 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2024 - this.birthYear + 10
+      }`
+    );
+  }
+}
+const apurba = new StudentCl("Apurba Dutta", 2003, "Computer Science");
+console.log(apurba);
+apurba.fullName = "Apurba";
+apurba.greet();
+console.log(apurba.age);
+console.log(apurba.course);
+//Over ridding method
+apurba.calcAge();
+*/
+
+//-------------------------
+
+/*
+// 222. no video 
+// inheritance between ES6 "Classes" Object.create 
+const PersonProto = {
+  calcAge() {
+    console.log(2024 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+const apurba = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+
+StudentProto.init = function (firstName, birthyear, course) {
+  PersonProto.init.call(this, firstName, birthyear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+// data1
+const avishek = Object.create(StudentProto);
+avishek.init("Avishek", 1996, "Arts");
+avishek.introduce();
+avishek.calcAge();
+
+// data2
+const ram = Object.create(StudentProto);
+ram.init("Ram", 2001, "Mythology");
+ram.introduce();
+ram.calcAge();
+*/
+
+//-------------------------
+
+/*
+// 223 no video
+// Another class example
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+    console.log(`Thank you for opening this bank account, ${owner} ❤️`);
+  }
+  deposite(val) {
+    this.movements.push(val);
+  }
+  withdraw(val) {
+    this.deposite(-val);
+  }
+  // internal method ( data privacy/ encapsulations)
+  approveLoan(val) {
+    return true;
+  }
+  requestLoan(val) {
+    if (this.approveLoan(val)) {
+      this.deposite(val);
+      console.log("Loan Approve!");
+    }
+  }
+}
+
+const acc1 = new Account("Apurba", "INR", 4099);
+// acc1.movements.push(1000);
+// acc1.movements.push(-90);
+acc1.deposite(1000);
+acc1.withdraw(90);
+console.log(acc1);
+console.log("pin", acc1.pin);
+acc1.requestLoan(1000);
+acc1.approveLoan(100);
+*/
+
+//-------------------------
+
+/*
+// 224. no video
+// Encapsulation: Protected propertiese and methods
+
+// to copy the previous code for example
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    //protected property
+    this._pin = pin;
+    this._movements = []; // protect this data to no one can access this data
+
+    this.locale = navigator.language;
+    console.log(`Thank you for opening this bank account, ${owner} ❤️`);
+  }
+  //public interface
+  getMovements() {
+    return this._movements;
+  }
+  deposite(val) {
+    this._movements.push(val);
+  }
+  withdraw(val) {
+    this.deposite(-val);
+  }
+  // internal method ( data privacy/ encapsulations)
+  _approveLoan(val) {
+    return true;
+  }
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      this.deposite(val);
+      console.log("Loan Approve!");
+    }
+  }
+}
+
+const acc1 = new Account("Apurba", "INR", 4099);
+// still accessable
+// acc1._movements.push(1000);
+// acc1._movements.push(-90);
+acc1.deposite(1000);
+acc1.withdraw(90);
+console.log(acc1);
+console.log("pin", acc1.pin);
+acc1.requestLoan(1000);
+acc1.approveLoan(100);
+console.log(acc1.getMovements());
+*/
+
