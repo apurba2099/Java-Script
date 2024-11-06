@@ -28,19 +28,37 @@ if (navigator.geolocation)
 
       const coords = [latitude, longitude];
 
-      const map = L.map('map').setView(coords, 16); //(coords and zoom which will represent it by 15, and vrious what i want to show zoom)
+      const map = L.map('map').setView(coords, 15); //(coords and zoom which will represent it by 15, and vrious what i want to show zoom)
 
-//there a different style in the map tiles openstreetmap.org/{z}
+      // console.log(map) // just for show the evennt in prototype
+
+      //there a different style in the map tiles openstreetmap.org/{z}
       L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      L.marker(coords)
-        .addTo(map)
-        .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-        .openPopup();
+      // Displaying on a map marker
+      map.on('click', function (mapEvent) {
+        console.log(mapEvent);
+        const { lat, lng } = mapEvent.latlng;
+
+        L.marker([lat, lng])
+          .addTo(map)
+          .bindPopup(
+            L.popup({
+              maxWidth: 250,
+              minWidth: 100,
+              autoClose: false,
+              closeOnClick: false,
+              className: 'running-popup',
+            })
+          )
+          .setPopupContent('Workout 🚴')
+          .openPopup();
+      });
     },
+
     function () {
       alert('Could not get your position!');
     }
