@@ -14,48 +14,68 @@ const inputElevation = document.querySelector('.form__input--elevation');
 //global variable
 let map, mapEvent;
 
-//geolocation use
-if (navigator.geolocation)
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      // console.log(position);
-      const { latitude } = position.coords;
-      const { longitude } = position.coords;
+class App {
+  #map;
+  #mapEvent;
+  constructor() {
+    // Get user's position
+    this._getPosition();
+  }
 
-      //   console.log(position);
-      console.log(latitude, longitude);
-      //   use google maps links
-      console.table(
-        `https://www.google.com/maps/@${latitude},${longitude},15z?entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D}`
+  _getPosition() {
+    //geolocation use
+    if (navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(
+        this._loadMap.bind(this),
+        function () {
+          alert('Could not get your position!');
+        }
       );
+  }
 
-      const coords = [latitude, longitude];
+  _loadMap(position) {
+    // console.log(position);
+    const { latitude } = position.coords;
+    const { longitude } = position.coords;
 
-      map = L.map('map').setView(coords, 15); //(coords and zoom which will represent it by 15, and vrious what i want to show zoom)
+    //   console.log(position);
+    console.log(latitude, longitude);
+    //   use google maps links
+    console.table(
+      `https://www.google.com/maps/@${latitude},${longitude},15z?entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D}`
+    );
 
-      // console.log(map) // just for show the evennt in prototype
+    const coords = [latitude, longitude];
 
-      //there a different style in the map tiles openstreetmap.org/{z}
-      L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+    console.log(this);
+    this.#map = L.map('map').setView(coords, 15); //(coords and zoom which will represent it by 15, and vrious what i want to show zoom)
 
-      // Displaying on a map marker
+    // console.log(map) // just for show the evennt in prototype
 
-      //Handling clicks on map
-      map.on('click', function (mapE) {
-        //Rendering Workout input form
-        mapEvent = mapE;
-        form.classList.remove('hidden');
-        inputDistance.focus();
-      });
-    },
+    //there a different style in the map tiles openstreetmap.org/{z}
+    L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(this.#map);
 
-    function () {
-      alert('Could not get your position!');
-    }
-  );
+    // Displaying on a map marker
+
+    //Handling clicks on map
+    this.#map.on('click', function (mapE) {
+      //Rendering Workout input form
+      this.#mapEvent = mapE;
+      form.classList.remove('hidden');
+      inputDistance.focus();
+    });
+  }
+
+  _showForm() {}
+  _toggleElevationField() {}
+  _newWorkout() {}
+}
+
+const app = new App();
+// app._getPosition();
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
@@ -84,9 +104,8 @@ form.addEventListener('submit', function (e) {
     .openPopup();
 });
 
-//toggling input fields 
+//toggling input fields
 inputType.addEventListener('change', function () {
-
   inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
 
   inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
