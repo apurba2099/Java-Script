@@ -51,6 +51,5 @@ const getCountryData = function (country) {
 };
 
 getCountryData("india");
-getCountryData("america");
-getCountryData("germany");
-getCountryData("japan");
+getCountryData("bangladesh");
+getCountryData("sri");

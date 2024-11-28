@@ -23,7 +23,6 @@ body {
   display: flex;
   flex-flow: column;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .countries {
@@ -43,6 +42,7 @@ body {
   border-radius: 0.7rem;
   margin: 0 3rem;
   /* overflow: hidden; */
+
 }
 
 .neighbour::before {
