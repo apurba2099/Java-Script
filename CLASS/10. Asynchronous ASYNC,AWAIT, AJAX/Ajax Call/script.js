@@ -83,6 +83,8 @@ const getCountryAndNeighbour = function (country) {
 
       // calling the neighbour country
       renderCountry(data2, "neighbour");
+
+      console.log(neighbour);
     });
   });
 };
@@ -91,6 +93,22 @@ const getCountryAndNeighbour = function (country) {
 // getCountryData("bangladesh");
 // getCountryData("sri");
 
-///251 Callback Hell
+/////251 Callback Hell//////
+// definition: a callback function under a callback function and then in a another function a it so onabort, called call back hell function.
+
+// getCountryAndNeighbour("india");
 getCountryAndNeighbour("india");
-// getCountryAndNeighbour("Iceland");
+
+/////Callback Hell//////
+// setTimeout(() => {
+//   console.log(`1 second`);
+//   setTimeout(() => {
+//     console.log(`2 second `);
+//     setTimeout(() => {
+//       console.log(`3 second`);
+//       setTimeout(() => {
+//         console.log(`4 second `);
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
