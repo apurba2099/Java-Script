@@ -35,10 +35,11 @@ const renderCountry = function (data, className = " ") {
   countriesContainer.style.opacity = 1;
 };
 // 253. Consuming a Promise
+
 // const getCountryData = function (country) {
 //   fetch(`https://restcountries.com/v3.1/name/${country}`)
 //     .then(function (response) {
-//       //   console.log(response);
+      //   console.log(response);
 
 //       return response.json();
 //     })
