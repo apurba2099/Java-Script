@@ -28,25 +28,43 @@ const renderCountry = function (data, className = " ") {
   countriesContainer.style.opacity = 1;
 };
 
+const renderError = function (message) {
+  countriesContainer.insertAdjacentHTML("beforeend", message);
+  // countriesContainer.style.opacity = 1;
+};
+
 const getCountryData = function (country) {
   // country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(
-      (response) => response.json(),
-      (err) => alert(err)
-    )
+    .then((response) => response.json())
     .then((data) => {
       renderCountry(data[0]);
       console.log("Full Data", data);
-      const neighbour = data[0].borders?.[0];
+      const neighbour = data[0].borders[0];
       console.log(neighbour);
+
+      if (!neighbour) return;
+
       //   country 2 (neighbour contry fetch)
       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
     })
-    .then((response) => response.json())
-    .then((data) => renderCountry(data[0], "neighbour"));
+    .then(
+      (response) => response.json()
+      // (err) => alert(err)
+    )
+    .then((data) => renderCountry(data[0], "neighbour"))
+    .catch((err) => {
+      console.error(`${err} 💥💥 This is created Error!`); //error can console
+      renderError(`Something went wrong 💥💥 ${err.message}. Try again!`); // using catch method to use (err) error handling
+    });
+  // .finally(() => {
+  countriesContainer.style.opacity = 1;
+  // });
 };
 
 btn.addEventListener("click", function () {
   getCountryData("india");
 });
+
+getCountryData("vxvx");
+// getCountryData("usa")
