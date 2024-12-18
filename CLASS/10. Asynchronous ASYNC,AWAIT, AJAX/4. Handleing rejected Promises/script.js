@@ -3,10 +3,7 @@ const btn = document.querySelector(".btn-country");
 const countriesContainer = document.querySelector(".countries");
 
 const renderCountry = function (data, className = " ") {
-  // console.log(data[0].flags.png);
-  // console.log(className);
   const html = `<article class="country ${className}">
-  
           <img class="country__img" src="${data.flags.png}" alt="Flag of ${
     data.name.common
   }" />
@@ -30,47 +27,18 @@ const renderCountry = function (data, className = " ") {
   countriesContainer.insertAdjacentHTML("beforeend", html);
   countriesContainer.style.opacity = 1;
 };
-// 253. Consuming a Promise
 
-//Old Skool  Function expression
-// const getCountryData = function (country) {
-//   fetch(`https://restcountries.com/v3.1/name/${country}`)
-//     .then(function (response) {
-//   console.log(response);
-
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//       renderCountry(data[0]);
-//     });
-// };
-
-// More Simple with Arrow function
 const getCountryData = function (country) {
   // country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then((response) => {
-      // consoling the response
-      // console.log("Raw Response Object:", response);
       return response.json();
     })
     .then((data) => {
       renderCountry(data[0]);
-
-      //   consoleing the data
       console.log("Full Data", data);
-
-      // Old method (video method)
-      // const neighbour = data[0].borders[0];
-      // if(!neighbour) return;
-
-      // New method (use optional chaining)
       const neighbour = data[0].borders?.[0];
       console.log(neighbour);
-
-      // -----not working in the course format code--------
-
       //   country 2 (neighbour contry fetch)
       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
     }) ///problem to renderCountry
@@ -78,4 +46,4 @@ const getCountryData = function (country) {
     .then((data) => renderCountry(data[0], "neighbour"));
 };
 
-getCountryData("italy");
+getCountryData("india");
