@@ -31,9 +31,10 @@ const renderCountry = function (data, className = " ") {
 const getCountryData = function (country) {
   // country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then((response) => {
-      return response.json();
-    })
+    .then(
+      (response) => response.json(),
+      (err) => alert(err)
+    )
     .then((data) => {
       renderCountry(data[0]);
       console.log("Full Data", data);
@@ -41,9 +42,11 @@ const getCountryData = function (country) {
       console.log(neighbour);
       //   country 2 (neighbour contry fetch)
       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
-    }) ///problem to renderCountry
+    })
     .then((response) => response.json())
     .then((data) => renderCountry(data[0], "neighbour"));
 };
 
-getCountryData("india");
+btn.addEventListener("click", function () {
+  getCountryData("india");
+});
