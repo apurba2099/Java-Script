@@ -36,35 +36,49 @@ const renderError = function (message) {
 const getCountryData = function (country) {
   // country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+
+      if (!response.ok)
+        //new Error is a constructor function
+        throw new Error(`Country not found! (${response.status})`);
+
+      return response.json();
+    })
     .then((data) => {
       renderCountry(data[0]);
       console.log("Full Data", data);
-      const neighbour = data[0].borders[0];
+      // const neighbour = data[0].borders[1];
+      const neighbour = "Wrong Data";
       console.log(neighbour);
 
+      // use guard clause
       if (!neighbour) return;
 
       //   country 2 (neighbour contry fetch)
       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
     })
     .then(
-      (response) => response.json()
+      (response) => {
+       if(!response.ok) throw new Error(`Country not found! ${response.status})`)
+
+
+        return response.json();
+      }
       // (err) => alert(err)
     )
     .then((data) => renderCountry(data[0], "neighbour"))
     .catch((err) => {
       console.error(`${err} 💥💥 This is created Error!`); //error can console
       renderError(`Something went wrong 💥💥 ${err.message}. Try again!`); // using catch method to use (err) error handling
+    })
+    //Finally() use for set a value for if promises coming or not coming like default value!
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
     });
-  // .finally(() => {
-  countriesContainer.style.opacity = 1;
-  // });
 };
 
 btn.addEventListener("click", function () {
   getCountryData("india");
 });
-
-getCountryData("vxvx");
-// getCountryData("usa")
+// getCountryData("BHULBHAL");
