@@ -33,43 +33,90 @@ const renderError = function (message) {
   // countriesContainer.style.opacity = 1;
 };
 
+/////Creat a function to control the error msg
+const getJSON = function (url, errorMsg = "Something went wrong") {
+  return fetch(url).then((response) => {
+    if (!response.ok)
+      //new Error is a constructor function
+      throw new Error(`${errorMsg} (${response.status})`);
+
+    return response.json();
+  });
+};
+
+// const getCountryData = function (country) {
+//   // country 1
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then((response) => {
+//       console.log(response);
+
+//       if (!response.ok)
+//         //new Error is a constructor function
+//         throw new Error(`Country not found! (${response.status})`);
+
+//       return response.json();
+//     })
+//     .then((data) => {
+//       renderCountry(data[0]);
+//       console.log("Full Data", data);
+//       const neighbour = data[0].borders[1];
+//       // const neighbour = "Wrong Data";
+//       console.log(neighbour);
+
+//       // use guard clause
+//       if (!neighbour) return;
+
+//       //   country 2 (neighbour contry fetch)
+//       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+//     })
+//     .then(
+//       (response) => {
+//         if (!response.ok)
+//           throw new Error(`Country not found! (${response.status})`);
+
+//         return response.json();
+//       }
+//       // (err) => alert(err)
+//     )
+//     .then((data) => renderCountry(data[0], "neighbour"))
+//     .catch((err) => {
+//       console.error(`${err} 💥💥 This is created Error!`); //error can console
+//       renderError(`Something went wrong 💥💥 ${err.message}. Try again!`); // using catch method to use (err) error handling
+//     })
+//     //Finally() use for set a value for if promises coming or not coming like default value!
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+
 const getCountryData = function (country) {
-  // country 1
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then((response) => {
-      console.log(response);
+  // ----Main Country 1 ----
 
-      if (!response.ok)
-        //new Error is a constructor function
-        throw new Error(`Country not found! (${response.status})`);
-
-      return response.json();
-    })
+  getJSON(
+    `https://restcountries.com/v3.1/name/${country}`,
+    "Country not found!"
+  )
     .then((data) => {
       renderCountry(data[0]);
+      
       console.log("Full Data", data);
-      // const neighbour = data[0].borders[1];
-      const neighbour = "Wrong Data";
+      const neighbour = data[0].borders?.[1];
+      // const neighbour = "Wrong Data";
       console.log(neighbour);
 
-      // use guard clause
-      if (!neighbour) return;
+      // use guard clause with throw new error
+      if (!neighbour) throw new Error("No Neighbour found!");
 
-      //   country 2 (neighbour contry fetch)
-      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+      // ----  Country 2 (neighbour contry fetch)----
+      return getJSON(
+        `https://restcountries.com/v3.1/alpha/${neighbour}`,
+        "Country not found!"
+      );
     })
-    .then(
-      (response) => {
-       if(!response.ok) throw new Error(`Country not found! ${response.status})`)
-
-
-        return response.json();
-      }
-      // (err) => alert(err)
-    )
     .then((data) => renderCountry(data[0], "neighbour"))
     .catch((err) => {
-      console.error(`${err} 💥💥 This is created Error!`); //error can console
+      // console.error(`${err}💥💥This is created Error!`); //error can console
+
       renderError(`Something went wrong 💥💥 ${err.message}. Try again!`); // using catch method to use (err) error handling
     })
     //Finally() use for set a value for if promises coming or not coming like default value!
@@ -81,4 +128,4 @@ const getCountryData = function (country) {
 btn.addEventListener("click", function () {
   getCountryData("india");
 });
-// getCountryData("BHULBHAL");
+getCountryData("australia");
