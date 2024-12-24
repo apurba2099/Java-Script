@@ -128,4 +128,4 @@ const getCountryData = function (country) {
 btn.addEventListener("click", function () {
   getCountryData("india");
 });
-getCountryData("australia");
+// getCountryData("australia");
