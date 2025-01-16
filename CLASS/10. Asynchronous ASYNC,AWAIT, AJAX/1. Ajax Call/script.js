@@ -19,14 +19,12 @@ const renderCountry = function (data, className = " ") {
             <p class="country__row"><span>👫</span>${(
               +data.population / 1_000_000
             ).toFixed(2)}M people</p>
-            <p class="country__row"><span>🗣️</span>${Object.values(
-              data.languages
-            ).join(",")}</p>
-            <p class="country__row"><span>💰</span>${Object.values(
-              data.currencies
-            )
-              .map((curr) => curr.name)
-              .join(", ")}</p>
+            <p class="country__row"><span>🗣️</span>${
+              Object.values(data.languages)[0]
+            }</p>
+              <p class="country__row"><span>💰</span>${
+                Object.values(data.currencies)[0].name
+              } </p>
           </div>
         </article>`;
 
