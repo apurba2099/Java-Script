@@ -1,51 +1,70 @@
 "use strict";
 
-///////////BUILDING A SIMPLE PROMISE//////
-const LotteryPromise = new Promise(function (resolve, reject) {
-    console.log(`Lottery draw is happening 🔮`);
-    setTimeout(function () {
-      if (Math.random() >= 0.5) {
-        resolve("You win🥇"); //full filled promise
-      } else {
-        reject(new Error("You lost😭"));
-      }
-    }, 2000);
+const renderCountry = function (countryData) {
+  console.log("Country Data:", countryData);
+};
+
+//GEOLOCATION API
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   (position) => resolve(position),
+    //   (err) => reject(err)
+    // );
+
+    navigator.geolocation.getCurrentPosition(resolve, reject);
   });
-  
-  LotteryPromise.then((res) => console.log(res)).catch((err) =>
-    console.error(err)
-  );
-  
-  //Promisifying setTimeout
-  const wait = function (seconds) {
-    return new Promise(function (resolve) {
-      setTimeout(resolve, seconds * 1000);
-    });
-  };
-  /*
-  wait(3)
-    .then(() => {
-      console.log(`I waited for 1 seconds`);
-      return wait(1);
+};
+
+////for practice//
+/*
+getPosition()
+  .then((pos) => {
+    console.log(pos);
+    const { latitude, longitude } = pos.coords;
+    return { latitude, longitude };
+  })
+  .then(({ latitude, longitude }) => {
+    console.log(latitude, longitude);
+  });
+*/
+// getPosition().then((pos) => {
+//   console.log(pos);
+// });
+
+//previous challenge - 1
+const whereAmI = function () {
+  //presenting the default value
+  // .then((pos) => {
+  //   const { latitude: lat, longitude: lng } = pos.coords;
+  getPosition()
+    .then((pos) => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+
+      return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
     })
-    .then(() => {
-      console.log(`I waited for 2 seconds`);
-      return wait(1);
+    .then((res) => {
+      if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
+      return res.json();
     })
-    .then(() => {
-      console.log(`I waited for 3 seconds`);
-      return wait(1);
+    .then((data) => {
+      console.log(data);
+
+      if (!data.city || !data.country) {
+        throw new Error(`Geo location API did not return city or country`);
+      }
+      console.log(`you are in ${data.city}, ${data.country}`);
+
+      return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
     })
-    .then(() => {
-      console.log(`I waited for 4 seconds`);
-      return wait(1);
+    .then((res) => {
+      if (!res.ok) throw new Error(`Counrty not found (${res.status})`);
+
+      return res.json();
     })
-    .then(() => {
-      console.log(`I waited for 5 seconds`);
-      return wait(1);
-    })
-    .then(() => console.log(`I waited for 6 seconds`));*/
-  
-  Promise.resolve(`ABCD!`).then((x) => console.log(x));
-  Promise.reject(new Error(`Problem!`)).catch((x) => console.error(x));
-  
+    .then((data) => renderCountry(data[0]))
+    .catch((err) => console.log(`${err.message} 💥`));
+};
+//just for preview
+const buttonClick = document.getElementById("buttonClick");
+buttonClick.addEventListener("click", whereAmI);
