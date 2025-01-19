@@ -15,7 +15,7 @@ const getPosition = function () {
   });
 };
 
-const whereAmI = async function (country) {
+const whereAmI = async function () {
   //GeoLocation
   const pos = await getPosition();
   const { latitude: lat, longitude: lng } = pos.coords;
