@@ -69,6 +69,7 @@ get3Countries("bangladesh", "australia", "usa");
 //1: Promise.race
 // Note: In JavaScript, Promise.race() is a method that takes an iterable of promises as input and returns a single promise. This returned promise settles (either resolves or rejects) as soon as one of the input promises settles, adopting the state (resolved or rejected) and value/reason of that first settled promise.
 
+// IIFE
 (async function () {
   const res = await Promise.race([
     getJson(`https://restcountries.com/v2/name/italy`),
@@ -78,3 +79,58 @@ get3Countries("bangladesh", "australia", "usa");
 
   console.log(res[0]);
 })();
+
+//create time out promise
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error("Request took to long!"));
+    }, sec * 1000);
+  });
+};
+
+Promise.race([
+  getJson(`https://restcountries.com/v2/name/tanzania`),
+  timeout(5),
+])
+  .then((res) => console.log(res[0]))
+  .catch((err) => console.error(err));
+
+// =================
+// Another one
+// ES2020
+// Promise.allSettled
+Promise.allSettled([
+  Promise.resolve("Success"),
+  Promise.reject("ERROR"),
+  Promise.resolve("Another Success"),
+])
+  .then((res) => console.log(res))
+  .catch((err) => console.error(err));
+
+//Diffreneces
+Promise.all([
+  Promise.resolve("Success"),
+  Promise.reject("ERROR"),
+  Promise.resolve("Another Success"),
+])
+  .then((res) => console.log(res))
+  .catch((err) => console.error(err));
+
+// =================
+// Another one
+// ES2021
+// Promise.any
+
+// Note: Basically Promise.race and Promise.any is similar but here the rejected Promises are ignored! so thats why Promise.any is always gonna be a fullfilled promise, uless all of them rejected!
+Promise.any([
+  Promise.resolve("Success"),
+  Promise.reject("ERROR"),
+  Promise.resolve("Another Success"),
+])
+  .then((res) => console.log(res))
+  .catch((err) => console.error(err));
+
+//Conclusion:
+// So that leaves three challenges on this section Asynchronus module is complete
