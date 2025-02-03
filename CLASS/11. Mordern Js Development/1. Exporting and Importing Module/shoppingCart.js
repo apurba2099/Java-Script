@@ -10,7 +10,7 @@ export const addToCart = function (product, quantity) {
   console.log(`${quantity} ${product} added to the cart`);
 };
 
-const totalPrice = 236;
+const totalPrice = [236];
 const totalQuantity = 23;
 export { totalPrice, totalQuantity as qt };
 // Note: we can easy to name change by "as".

@@ -25,9 +25,9 @@ console.log("Importing Module");
 
 // Note: in situation use to default or named.
 // {cart} make the objects like.
-import add, {cart} from "./shoppingCart.js";
+import add, { cart } from "./shoppingCart.js";
 add("pizza🍕", 2);
 add("bread🍞", 4);
 add("apples🍎", 8);
 
-console.log(cart)
+console.log(cart);
