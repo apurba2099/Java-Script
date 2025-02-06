@@ -5,7 +5,7 @@
 // Use IIFE
 const shoppingCart = (function () {
   const cart = [];
-  const orderId = 1001
+  const orderId = 1001;
   const shippingCost = 10;
   const totalPrice = 237;
   const totalQuantity = 23;
@@ -17,7 +17,9 @@ const shoppingCart = (function () {
 
   const orderStock = function (product, quantity) {
     cart.push({ quantity, product });
-    console.log(`Quantity:${totalQuantity}, Price:${totalPrice} added to Order Stock🎙️`);
+    console.log(
+      `Quantity:${totalQuantity}, Price:${totalPrice} added to Order Stock🎙️ is ${shippingCost}`
+    );
   };
 
   return {
@@ -30,11 +32,11 @@ const shoppingCart = (function () {
   };
 })();
 
-//Note:  These are the accessable cause  addToCart are returning 
+//Note:  These are the accessable cause  addToCart are returning
 shoppingCart.addToCart("apple", 4);
 shoppingCart.addToCart("pizzas", 8);
 
-shoppingCart.orderStock()
+shoppingCart.orderStock();
 
 // Note: These are the encapsulate or not accessable cause this are not return on the function
 console.log(shoppingCart.shippingCost);
@@ -42,4 +44,3 @@ console.log(shoppingCart.orderId);
 
 // Note: This is overall see the function
 console.log(shoppingCart);
-
