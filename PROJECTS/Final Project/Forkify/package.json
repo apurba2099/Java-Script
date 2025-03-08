@@ -1,0 +1,14 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Recipe Application",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Apurba Dutta",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.13.3"
+  }
+}
