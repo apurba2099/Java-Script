@@ -1,0 +1,2 @@
+document.querySelector(".recipe"),async function(){try{let e=await fetch("https://forkify-api.jonas.io/api/v2/recipes/664c8f193e7aa067e94e85be"),i=await e.json();if(!e.ok)throw Error(`${i.message} (Status code: ${e.status})`);let{recipe:t}=i.data;t={id:t.id,title:t.title,publisher:t.publisher,sourceUrl:t.source_url,image:t.image_url,servings:t.servings,cookingTime:t.cooking_time,ingredients:t.ingredients},console.log("Recipe:",t)}catch(e){alert(e)}}();
+//# sourceMappingURL=index.e9ac0fca.js.map
