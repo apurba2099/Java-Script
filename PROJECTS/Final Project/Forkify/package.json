@@ -9,9 +9,12 @@
   "author": "Apurba Dutta",
   "license": "ISC",
   "dependencies": {
-    "parcel": "^2.13.3"
+    "core-js": "^3.41.0",
+    "parcel": "^2.13.3",
+    "regenerator-runtime": "^0.14.1"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.13.3",
     "svgo": "^3.3.2"
   }
 }
