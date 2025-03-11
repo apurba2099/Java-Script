@@ -28,11 +28,9 @@ const controlRecipes = async function () {
   }
 };
 
-['hashchange', 'load'].forEach(ev =>
-  window.addEventListener(ev, controlRecipes)
-);
-
-// window.addEventListener('hashchange', showRecipe);
-// window.addEventListener('load', showRecipe);
-
 //https://forkify-api.jonas.io/api/v2/recipes?search=pizza
+
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+};
+init();
