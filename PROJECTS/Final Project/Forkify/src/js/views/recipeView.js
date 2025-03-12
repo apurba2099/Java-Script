@@ -2,7 +2,7 @@
 import icons from 'url:../../img/icons.svg'; //Parcel 2
 
 import { Fraction } from 'fractional'; //by importing npm i fractional
-console.log(Fraction);
+// console.log(Fraction);
 
 class RecipeView {
   //private property "#"
@@ -50,7 +50,7 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
-  // Success message 
+  // Success message
   renderMessage(message = this.#message) {
     const markup = `<div class="message">
             <div>
