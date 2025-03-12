@@ -616,7 +616,7 @@ const controlRecipes = async function() {
         // 2) Rendering recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
-        alert(err);
+        (0, _recipeViewJsDefault.default).renderError(`We could not find that recipe. Please try another one!`);
     }
 };
 //https://forkify-api.jonas.io/api/v2/recipes?search=pizza
@@ -2524,6 +2524,7 @@ const loadRecipe = async function(id) {
     } catch (err) {
         //Temp error handling
         console.error(`${err}\u{1F525}\u{1F525}\u{1F525}Error hain bhai!`);
+        throw err;
     }
 };
 
@@ -2576,6 +2577,8 @@ class RecipeView {
     //private property "#"
     #parentElement = document.querySelector('.recipe');
     #data;
+    #errorMessage = 'We could not find that recipe. Please try another one!';
+    #message = '';
     render(data) {
         this.#data = data;
         const markup = this.#generateMarkup();
@@ -2585,8 +2588,9 @@ class RecipeView {
     #clear() {
         this.#parentElement.innerHTML = '';
     }
-    // this is all are the public method and private method, these are not functions
-    renderSpinner = function() {
+    // This is all are the public method and private method, these are not functions
+    //Spinner Loader
+    renderSpinner() {
         const markup = `<div class="spinner">
             <svg>
               <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
@@ -2594,7 +2598,33 @@ class RecipeView {
           </div>`;
         this.#parentElement.innerHTML = '';
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-    };
+    }
+    //Error Showcase on page
+    renderError(message = this.#errorMessage) {
+        const markup = `<div class="error">
+            <div>
+              <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>`;
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+    // Success message 
+    renderMessage(message = this.#message) {
+        const markup = `<div class="message">
+            <div>
+              <svg>
+                <use href="${(0, _iconsSvgDefault.default)}#icon-smile"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>`;
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
     addHandlerRender(handler) {
         [
             'hashchange',

@@ -2,6 +2,7 @@ import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime'; //This is called Polyfilling async await
+
 import recipeView from './views/recipeView.js';
 
 const recipeContainer = document.querySelector('.recipe');
@@ -24,7 +25,9 @@ const controlRecipes = async function () {
     // 2) Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    alert(err);
+    recipeView.renderError(
+      `We could not find that recipe. Please try another one!`
+    );
   }
 };
 
