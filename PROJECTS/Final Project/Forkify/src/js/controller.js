@@ -7,7 +7,11 @@ import resultsView from './views/resultsView.js';
 import 'regenerator-runtime/runtime'; //This is called Polyfilling async await
 import recipeView from './views/recipeView.js';
 
-// const recipeContainer = document.querySelector('.recipe');
+//This comming from parcel
+if (module.hot) {
+  module.hot.accept();
+}
+
 // APi= https://forkify-api.jonas.io
 //https://forkify-api.jonas.io/api/v2/recipes?search=pizza
 ///////////////////////////////////////
@@ -35,7 +39,7 @@ const controlRecipes = async function () {
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
-
+    // console.log(resultsView);
     // 1) Get search query
     const query = searchView.getQuery();
     if (!query) return;
@@ -44,7 +48,8 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     //3 Render results
-    console.log(model.state.search.results);
+    // console.log(model.state.search.results);
+    resultsView.render(model.state.search.results);
   } catch (error) {
     console.error(error);
   }

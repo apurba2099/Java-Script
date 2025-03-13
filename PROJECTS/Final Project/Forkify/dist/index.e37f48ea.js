@@ -606,7 +606,8 @@ var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 var _resultsViewJs = require("./views/resultsView.js");
 var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
 var _runtime = require("regenerator-runtime/runtime"); //This is called Polyfilling async await
-// const recipeContainer = document.querySelector('.recipe');
+//This comming from parcel
+if (module.hot) module.hot.accept();
 // APi= https://forkify-api.jonas.io
 //https://forkify-api.jonas.io/api/v2/recipes?search=pizza
 ///////////////////////////////////////
@@ -627,13 +628,15 @@ const controlRecipes = async function() {
 const controlSearchResults = async function() {
     try {
         (0, _resultsViewJsDefault.default).renderSpinner();
+        // console.log(resultsView);
         // 1) Get search query
         const query = (0, _searchViewJsDefault.default).getQuery();
         if (!query) return;
         //2) Load search results
         await _modelJs.loadSearchResults(query);
         //3 Render results
-        console.log(_modelJs.state.search.results);
+        // console.log(model.state.search.results);
+        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
     } catch (error) {
         console.error(error);
     }
@@ -2668,9 +2671,7 @@ class RecipeView extends (0, _viewJsDefault.default) {
           </div>
 
           <div class="recipe__user-generated">
-            <svg>
-              <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
-            </svg>
+           
           </div>
           <button class="btn--round">
             <svg class="">
@@ -3021,6 +3022,7 @@ var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class View {
     _data;
     render(data) {
+        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
         this._data = data;
         const markup = this._generateMarkup();
         this._clear();
@@ -3098,11 +3100,32 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _view = require("./view");
 var _viewDefault = parcelHelpers.interopDefault(_view);
+var _iconsSvg = require("url:../../img/icons.svg");
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class ResultView extends (0, _viewDefault.default) {
     _parentElement = document.querySelector('.results');
+    _errorMessage = 'No recipes found for your query! Please try again :(';
+    _message = '';
+    _generateMarkup() {
+        console.log(this._data);
+        return this._data.map(this._generateMarkupPreview).join('');
+    }
+    _generateMarkupPreview(results) {
+        return `<li class="preview">
+    <a class="preview__link" href="#${results.id}">
+      <figure class="preview__fig">
+        <img src="${results.image}" alt="${results.title}" />
+      </figure>
+      <div class="preview__data">
+        <h4 class="preview__title">${results.title}</h4>
+        <p class="preview__publisher">${results.publisher}</p>
+      </div>
+    </a>
+  </li>`;
+    }
 }
 exports.default = new ResultView();
 
-},{"./view":"bWlJ9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")
+},{"./view":"bWlJ9","url:../../img/icons.svg":"loVOp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ik2hV","aenu9"], "aenu9", "parcelRequire94c2")
 
 //# sourceMappingURL=index.e37f48ea.js.map
