@@ -7,7 +7,7 @@ import resultsView from './views/resultsView.js';
 import 'regenerator-runtime/runtime'; //This is called Polyfilling async await
 import recipeView from './views/recipeView.js';
 
-//This comming from parcel
+// This comming from parcel
 if (module.hot) {
   module.hot.accept();
 }
@@ -49,7 +49,8 @@ const controlSearchResults = async function () {
 
     //3 Render results
     // console.log(model.state.search.results);
-    resultsView.render(model.state.search.results);
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage());
   } catch (error) {
     console.error(error);
   }
