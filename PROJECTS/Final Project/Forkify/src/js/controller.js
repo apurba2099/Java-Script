@@ -3,6 +3,7 @@ import recipeView from './views/recipeView.js';
 import 'core-js/stable';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
 
 import 'regenerator-runtime/runtime'; //This is called Polyfilling async await
 import recipeView from './views/recipeView.js';
@@ -51,14 +52,36 @@ const controlSearchResults = async function () {
     // console.log(model.state.search.results);
     // resultsView.render(model.state.search.results);
     resultsView.render(model.getSearchResultsPage());
+
+    //4) Render initial Pagination
+    paginationView.render(model.state.search);
   } catch (error) {
     console.error(error);
   }
 };
 
+const controlPagination = function (goToPage) {
+  //1 Render NEW results
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  //2) Render NEW Pagination buttons
+  paginationView.render(model.state.search);
+};
+
+//Servings + and - controller code
+const controlServings = function (newServings) {
+  //Update the recipe servings (in state)
+  model.updateServings(newServings);
+
+  // Update the recipe view
+  recipeView.render(model.state.recipe);
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 
 init();
