@@ -616,34 +616,35 @@ if (module.hot) module.hot.accept();
 const controlRecipes = async function() {
     try {
         const id = window.location.hash.slice(1);
-        // console.log(id);
         if (!id) return;
         (0, _recipeViewJsDefault.default).renderSpinner();
-        // 1) Loading the recipe
+        // 0) Update results view to mark selected search result
+        (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPage());
+        // 1) Updating bookmarks view
+        // bookmarksView.update(model.state.bookmarks);
+        // 2) Loading recipe
         await _modelJs.loadRecipe(id);
-        // 2) Rendering recipe
+        // 3) Rendering recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
-        (0, _recipeViewJsDefault.default).renderError(`We could not find that recipe. Please try another one!`);
+        (0, _recipeViewJsDefault.default).renderError();
+        console.error(err);
     }
 };
 const controlSearchResults = async function() {
     try {
         (0, _resultsViewJsDefault.default).renderSpinner();
-        // console.log(resultsView);
         // 1) Get search query
         const query = (0, _searchViewJsDefault.default).getQuery();
         if (!query) return;
-        //2) Load search results
+        // 2) Load search results
         await _modelJs.loadSearchResults(query);
-        //3 Render results
-        // console.log(model.state.search.results);
-        // resultsView.render(model.state.search.results);
+        // 3) Render results
         (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultsPage());
-        //4) Render initial Pagination
+        // 4) Render initial pagination buttons
         (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
-    } catch (error) {
-        console.error(error);
+    } catch (err) {
+        console.log(err);
     }
 };
 const controlPagination = function(goToPage) {
@@ -3079,7 +3080,6 @@ class View {
         this._parentElement.insertAdjacentHTML('afterbegin', markup);
     }
     update(data) {
-        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
         this._data = data;
         const newMarkup = this._generateMarkup();
         const newDOM = document.createRange().createContextualFragment(newMarkup);
@@ -3178,17 +3178,18 @@ class ResultView extends (0, _viewDefault.default) {
         return this._data.map(this._generateMarkupPreview).join('');
     }
     _generateMarkupPreview(results) {
+        const id = window.location.hash.slice(1);
         return `<li class="preview">
-    <a class="preview__link" href="#${results.id}">
-      <figure class="preview__fig">
-        <img src="${results.image}" alt="${results.title}" />
-      </figure>
-      <div class="preview__data">
-        <h4 class="preview__title">${results.title}</h4>
-        <p class="preview__publisher">${results.publisher}</p>
-      </div>
-    </a>
-  </li>`;
+      <a class="preview__link ${results.id === id ? ' preview__link--active' : ''}" href="#${results.id}">
+        <figure class="preview__fig">
+          <img src="${results.image}" alt="${results.title}" />
+        </figure>
+        <div class="preview__data">
+          <h4 class="preview__title">${results.title}</h4>
+          <p class="preview__publisher">${results.publisher}</p>
+        </div>
+      </a>
+    </li>`;
     }
 }
 exports.default = new ResultView();

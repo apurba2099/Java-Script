@@ -20,43 +20,45 @@ if (module.hot) {
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-    // console.log(id);
 
     if (!id) return;
     recipeView.renderSpinner();
 
-    // 1) Loading the recipe
+    // 0) Update results view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
+
+    // 1) Updating bookmarks view
+    // bookmarksView.update(model.state.bookmarks);
+
+    // 2) Loading recipe
     await model.loadRecipe(id);
 
-    // 2) Rendering recipe
+    // 3) Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    recipeView.renderError(
-      `We could not find that recipe. Please try another one!`
-    );
+    recipeView.renderError();
+    console.error(err);
   }
 };
 
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
-    // console.log(resultsView);
+
     // 1) Get search query
     const query = searchView.getQuery();
     if (!query) return;
 
-    //2) Load search results
+    // 2) Load search results
     await model.loadSearchResults(query);
 
-    //3 Render results
-    // console.log(model.state.search.results);
-    // resultsView.render(model.state.search.results);
+    // 3) Render results
     resultsView.render(model.getSearchResultsPage());
 
-    //4) Render initial Pagination
+    // 4) Render initial pagination buttons
     paginationView.render(model.state.search);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
