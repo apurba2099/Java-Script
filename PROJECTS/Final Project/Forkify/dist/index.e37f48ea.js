@@ -2573,7 +2573,7 @@ const loadRecipe = async function(id) {
             cookingTime: recipe.cooking_time,
             ingredients: recipe.ingredients
         };
-        console.log('Recipe:', state.recipe);
+    // console.log('Recipe:', state.recipe);
     } catch (err) {
         //Temp error handling
         console.error(`${err}\u{1F525}\u{1F525}\u{1F525}Error hain bhai!`);
@@ -2583,6 +2583,7 @@ const loadRecipe = async function(id) {
 const loadSearchResults = async function(query) {
     try {
         state.search.query = query;
+        state.search.page = 1; // Reset page to 1 for new search query
         const data = await (0, _helpersJs.getJSON)(`${(0, _configJs.API_URL)}?search=${query}`);
         console.log(data);
         state.search.results = data.data.recipes.map((rec)=>{

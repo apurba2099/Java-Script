@@ -28,7 +28,7 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
-    console.log('Recipe:', state.recipe);
+    // console.log('Recipe:', state.recipe);
   } catch (err) {
     //Temp error handling
     console.error(`${err}🔥🔥🔥Error hain bhai!`);
@@ -40,6 +40,7 @@ export const loadRecipe = async function (id) {
 export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
+    state.search.page = 1; // Reset page to 1 for new search query
     const data = await getJSON(`${API_URL}?search=${query}`);
 
     console.log(data);
