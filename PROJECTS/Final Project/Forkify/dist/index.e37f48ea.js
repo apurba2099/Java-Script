@@ -597,7 +597,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"aenu9":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _webImmediateJs = require("core-js/modules/web.immediate.js"); // clearBookmarks();
+var _webImmediateJs = require("core-js/modules/web.immediate.js");
 var _modelJs = require("./model.js");
 var _recipeViewJs = require("./views/recipeView.js");
 var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
@@ -692,9 +692,6 @@ const init = function() {
     (0, _addRecipeViewsJsDefault.default).addHandlerUpload(controlAddRecipe);
 };
 init();
-const clearBookmarks = function() {
-    localStorage.clear('bookmarks');
-};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultsView.js":"cSbZE","./views/paginationView.js":"6z7bi","./views/bookmarkViews.js":"eCgKD","./views/addRecipeViews.js":"h8dUD"}],"gkKU3":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
@@ -2671,6 +2668,9 @@ const init = function() {
 };
 init();
 console.log(state.bookmarks);
+const clearBookmarks = function() {
+    localStorage.clear('bookmarks');
+}; // clearBookmarks();
 
 },{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs","./helpers.js":"hGI1E"}],"k5Hzs":[function(require,module,exports,__globalThis) {
 // In the upperCase variable is a practice of only Configuration file js
