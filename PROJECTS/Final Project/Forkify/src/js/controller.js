@@ -7,9 +7,8 @@ import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
 
-import 'core-js/stable';
+import 'core-js/actual';
 import 'regenerator-runtime/runtime';
-import { async } from 'regenerator-runtime';
 
 const controlRecipes = async function () {
   try {
@@ -121,11 +120,17 @@ const controlAddRecipe = async function (newRecipe) {
 
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarks);
+
   recipeView.addHandlerRender(controlRecipes);
+
   recipeView.addHandlerUpdateServings(controlServings);
+
   recipeView.addHandlerAddBookmark(controlAddBookmark);
+
   searchView.addHandlerSearch(controlSearchResults);
+
   paginationView.addHandlerClick(controlPagination);
+
   addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 init();
