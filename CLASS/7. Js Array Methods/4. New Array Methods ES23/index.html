@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const transactions = [100, 1000, 200, -50, -200, -3434, 1000];
+      const checkTrasaction = Object.groupBy(transactions, (movement) =>
+        movement > 0 ? "Deposite" : "Withdrawl"
+      );
+      console.log(checkTrasaction);
+
+      //use reverse()
+      console.log("before reverse", transactions);
+      const reversed = transactions.reverse();
+      console.log("after reverse()", transactions);
+
+      //use toReverse()
+      const useToReversed = transactions.toReversed();
+      console.log("Use toReversed()", useToReversed);
+
+      //use toSplice()
+      transactions[1] = 2000;
+      console.log("Update",transactions);
+      
+    </script>
+  </body>
+</html>
