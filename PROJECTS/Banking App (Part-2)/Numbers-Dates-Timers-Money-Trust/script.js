@@ -2,7 +2,7 @@
 
 // Data
 const account1 = {
-  owner: 'Bikram Pal',
+  owner: 'Apurba Dutta',
   transactions: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
   interestRate: 1.2, // %
   pin: 1111,
